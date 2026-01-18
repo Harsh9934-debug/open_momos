@@ -164,7 +164,8 @@
     </style>
 </head>
 
-<body class="bg-maroon-950 text-neutral-100 antialiased selection:bg-accent-red selection:text-white overflow-x-hidden">
+<body
+    class="bg-maroon-950 text-neutral-100 antialiased selection:bg-accent-red selection:text-white overflow-x-hidden w-full">
 
     <!-- Preloader -->
     <div id="preloader">
@@ -249,12 +250,26 @@
                 </button>
             </div>
 
-            <!-- Mobile Menu -->
-            <button class="md:hidden p-2 text-gold-400 interactive-hover">
-                <span class="iconify w-6 h-6" data-icon="lucide:menu"></span>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden p-2 text-gold-400 interactive-hover z-50 relative" onclick="toggleMobileMenu()">
+                <span class="iconify w-6 h-6" data-icon="lucide:menu" id="menu-icon"></span>
             </button>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-maroon-950/95 backdrop-blur-xl z-40 hidden flex-col items-center justify-center space-y-8 opacity-0 transition-opacity duration-300">
+        <nav class="flex flex-col items-center space-y-8 font-serif text-2xl text-gold-300">
+            <a href="#signature" onclick="toggleMobileMenu()" class="hover:text-white transition-colors">Signatures</a>
+            <a href="#why-us" onclick="toggleMobileMenu()" class="hover:text-white transition-colors">Philosophy</a>
+            <a href="#location" onclick="toggleMobileMenu()" class="hover:text-white transition-colors">Visit</a>
+        </nav>
+        <button onclick="toggleMobileMenu(); toggleModal(true)"
+            class="px-8 py-3 rounded-full bg-accent-red text-white text-sm font-bold uppercase tracking-widest shadow-lg">
+            Reserve Table
+        </button>
+    </div>
 
     <!-- Hero Section -->
     <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
@@ -284,7 +299,7 @@
                 </div>
 
                 <h1
-                    class="font-serif text-6xl sm:text-7xl lg:text-9xl font-medium leading-[0.85] text-white tracking-tight drop-shadow-2xl">
+                    class="font-serif text-5xl sm:text-7xl lg:text-9xl font-medium leading-[0.9] lg:leading-[0.85] text-white tracking-tight drop-shadow-2xl">
                     <span
                         class="block text-transparent bg-clip-text bg-gradient-to-b from-white to-neutral-400 opacity-90">Crafted</span>
                     <span
@@ -332,13 +347,13 @@
     </section>
 
     <!-- Signatures Section -->
-    <section id="signature" class="py-32 bg-maroon-950 relative z-10">
+    <section id="signature" class="py-16 md:py-24 lg:py-32 bg-maroon-950 relative z-10">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8" data-aos="fade-up">
                 <div>
                     <span class="text-xs uppercase tracking-[0.4em] text-gold-500 font-bold block mb-2">The
                         Collection</span>
-                    <h2 class="font-serif text-4xl sm:text-6xl text-white leading-none">Signature<br /><span
+                    <h2 class="font-serif text-3xl sm:text-4xl sm:text-6xl text-white leading-none">Signature<br /><span
                             class="text-neutral-500 italic">Creations</span></h2>
                 </div>
                 <a href="#"
@@ -440,12 +455,13 @@
     </section>
 
     <!-- Quote Section -->
-    <section class="relative py-40 bg-fixed bg-cover bg-center flex items-center justify-center bg-maroon-950"
+    <section
+        class="relative py-20 md:py-32 lg:py-40 bg-fixed bg-cover bg-center flex items-center justify-center bg-maroon-950"
         style="background-image: url('assets/hero_momo.png');">
         <div class="absolute inset-0 bg-maroon-950/80"></div>
         <div class="relative z-10 text-center px-6 max-w-4xl mx-auto" data-aos="zoom-in">
             <span class="text-gold-500 text-6xl font-serif block mb-6">“</span>
-            <h2 class="font-serif text-4xl md:text-6xl text-white leading-tight mb-8">
+            <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl text-white leading-tight mb-8">
                 Food represents the deepest form of intimacy. We don't just feed you; we share our soul.
             </h2>
             <div class="flex items-center justify-center gap-4">
@@ -460,7 +476,7 @@
     <section id="location" class="relative bg-maroon-950 border-t border-gold-500/5">
         <div class="grid lg:grid-cols-2 min-h-[600px]">
             <!-- Interactive Map Side -->
-            <div class="relative h-[400px] lg:h-full bg-neutral-900 group overflow-hidden">
+            <div class="relative h-[300px] lg:h-full bg-neutral-900 group overflow-hidden">
                 <iframe title="Location"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.021942571764!2d77.63713847506929!3d12.969810887349902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1409a93b20bd%3A0x4da751b4fc0adc18!2sIndiranagar%2C%20Bengaluru!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                     class="w-full h-full filter grayscale contrast-125 opacity-50 group-hover:opacity-80 transition-opacity duration-700 invert"
@@ -473,10 +489,10 @@
             </div>
 
             <!-- Info Side -->
-            <div class="flex items-center justify-center p-12 lg:p-24 bg-maroon-950 relative">
+            <div class="flex items-center justify-center p-8 lg:p-24 bg-maroon-950 relative">
                 <div class="space-y-12 max-w-md w-full" data-aos="fade-left">
                     <div>
-                        <h3 class="font-serif text-4xl text-white mb-2">Visit Us</h3>
+                        <h3 class="font-serif text-3xl md:text-4xl text-white mb-2">Visit Us</h3>
                         <p class="text-neutral-500">Walk-ins welcome, reservations recommended.</p>
                     </div>
 
@@ -591,25 +607,26 @@
         </div>
     </div>
 
-    <section id="chutney-scroll" class="h-[200vh] relative bg-neutral-900 border-t border-white/5">
+    <section id="chutney-scroll" class="h-[150vh] md:h-[200vh] relative bg-neutral-900 border-t border-white/5">
         <div class="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
             <div class="absolute top-1/4 z-20 text-center mix-blend-difference pointer-events-none">
-                <h2 class="font-serif text-6xl md:text-8xl text-white opacity-0 transform translate-y-10 transition-all duration-700 ease-out"
+                <h2 class="font-serif text-5xl md:text-6xl lg:text-8xl text-white opacity-0 transform translate-y-10 transition-all duration-700 ease-out"
                     id="drip-text">
                     Pure <span class="italic text-gold-500">Essence</span>
                 </h2>
             </div>
 
             <div id="chutney-sprite"
-                class="w-[600px] h-[600px] bg-[url('assets/chutney_drip_spritesheet.png')] bg-no-repeat bg-[length:400%_400%] bg-left-top relative z-10 filter contrast-110">
+                class="w-[600px] max-w-full h-[600px] bg-[url('assets/chutney_drip_spritesheet.png')] bg-no-repeat bg-[length:400%_400%] bg-left-top relative z-10 filter contrast-110">
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-maroon-950 py-20 border-t border-gold-500/5 text-center relative z-10">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="font-serif text-8xl text-white/5 font-bold mb-[-30px]">OPEN MOMOS</h2>
+    <footer class="bg-maroon-950 py-12 md:py-20 border-t border-gold-500/5 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-6 overflow-hidden">
+            <h2 class="font-serif text-[15vw] md:text-8xl text-white/5 font-bold mb-[-20px] md:mb-[-30px]">OPEN MOMOS
+            </h2>
             <div class="relative z-10 flex flex-col items-center">
                 <div
                     class="w-12 h-12 rounded-full border border-gold-500 bg-maroon-900 flex items-center justify-center mb-6">
@@ -731,6 +748,29 @@
                 }, 300);
             }
         }
+
+        // Mobile Menu Logic
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+
+            if (menu.classList.contains('hidden')) {
+                // Open
+                menu.classList.remove('hidden');
+                // Trigger reflow
+                void menu.offsetWidth;
+                menu.classList.remove('opacity-0');
+                icon.setAttribute('data-icon', 'lucide:x');
+            } else {
+                // Close
+                menu.classList.add('opacity-0');
+                icon.setAttribute('data-icon', 'lucide:menu');
+                setTimeout(() => {
+                    menu.classList.add('hidden');
+                }, 300);
+            }
+        }
+
 
 
 
