@@ -58,9 +58,26 @@
     </script>
 
     <style>
-        /* Custom Cursor */
+        /* Custom Cursor - Hide on touch devices */
+        @media (hover: hover) and (pointer: fine) {
+            body {
+                cursor: none;
+            }
+            .custom-cursor, .cursor-dot {
+                display: block;
+            }
+        }
+
+        @media (hover: none) or (pointer: coarse) {
+            body {
+                cursor: auto;
+            }
+            .custom-cursor, .cursor-dot {
+                display: none !important;
+            }
+        }
+
         body {
-            cursor: none;
             background-color: #0F0101;
         }
 
@@ -161,6 +178,13 @@
             background: #FFD700;
             transition: width 1.5s ease-in-out;
         }
+
+        /* Responsive text scaling */
+        @media (max-width: 360px) {
+            .hero-title-main {
+                font-size: 2.5rem !important;
+            }
+        }
     </style>
 </head>
 
@@ -169,14 +193,14 @@
 
     <!-- Preloader -->
     <div id="preloader">
-        <div class="text-center">
-            <div class="relative w-20 h-20 mx-auto mb-6 flex items-center justify-center">
-                <span class="font-serif text-4xl text-gold-400 font-bold animate-pulse">M</span>
+        <div class="text-center px-4">
+            <div class="relative w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 flex items-center justify-center">
+                <span class="font-serif text-3xl sm:text-4xl text-gold-400 font-bold animate-pulse">M</span>
                 <div class="absolute inset-0 border border-gold-500/30 rounded-full animate-[spin_4s_linear_infinite]">
                 </div>
             </div>
-            <h2 class="font-serif text-lg text-white tracking-[0.3em] uppercase mb-4">Open Momos</h2>
-            <div class="w-48 h-[1px] bg-white/10 mx-auto rounded-full overflow-hidden">
+            <h2 class="font-serif text-base sm:text-lg text-white tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-4">Open Momos</h2>
+            <div class="w-36 sm:w-48 h-[1px] bg-white/10 mx-auto rounded-full overflow-hidden">
                 <div id="loader-bar" class="loader-line"></div>
             </div>
         </div>
@@ -185,8 +209,6 @@
     <!-- Custom Cursor Elements -->
     <div class="custom-cursor" id="cursor"></div>
     <div class="cursor-dot" id="cursor-dot"></div>
-
-
 
     <!-- Ambient Glows -->
     <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
@@ -197,26 +219,26 @@
     </div>
 
     <!-- Navigation -->
-    <header class="fixed top-0 w-full z-50 transition-all duration-500 py-6 border-b border-transparent">
-        <div class="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8">
+    <header class="fixed top-0 w-full z-50 transition-all duration-500 py-4 sm:py-6 border-b border-transparent">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
             <!-- Logo -->
-            <a href="#" class="group flex items-center space-x-3 interactive-hover">
+            <a href="#" class="group flex items-center space-x-2 sm:space-x-3 interactive-hover">
                 <div
-                    class="relative flex items-center justify-center h-12 w-12 overflow-hidden rounded-full border border-gold-400/50 bg-maroon-900 transition-transform group-hover:scale-105 duration-500">
-                    <span class="font-serif text-2xl font-bold text-white z-10">M</span>
+                    class="relative flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 overflow-hidden rounded-full border border-gold-400/50 bg-maroon-900 transition-transform group-hover:scale-105 duration-500">
+                    <span class="font-serif text-xl sm:text-2xl font-bold text-white z-10">M</span>
                     <div class="absolute inset-0 bg-gold-400/10 opacity-0 group-hover:opacity-100 transition-opacity">
                     </div>
                 </div>
                 <div class="flex flex-col">
                     <span
-                        class="font-serif text-xl font-medium tracking-wide text-gold-300 leading-none group-hover:text-white transition-colors duration-300">Open
+                        class="font-serif text-lg sm:text-xl font-medium tracking-wide text-gold-300 leading-none group-hover:text-white transition-colors duration-300">Open
                         Momos</span>
-                    <span class="text-[0.6rem] uppercase tracking-[0.25em] text-neutral-400">Royal Taste</span>
+                    <span class="text-[0.5rem] sm:text-[0.6rem] uppercase tracking-[0.2em] sm:tracking-[0.25em] text-neutral-400">Royal Taste</span>
                 </div>
             </a>
 
             <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center space-x-10 text-xs font-medium tracking-[0.15em] uppercase">
+            <nav class="hidden lg:flex items-center space-x-8 xl:space-x-10 text-xs font-medium tracking-[0.15em] uppercase">
                 <a href="#signature"
                     class="relative group text-neutral-400 hover:text-gold-400 transition-colors interactive-hover">
                     Signatures
@@ -240,18 +262,18 @@
             <!-- CTA -->
             <div class="hidden sm:flex items-center space-x-4">
                 <button onclick="toggleModal(true)"
-                    class="interactive-hover relative px-8 py-3 overflow-hidden rounded-full group bg-transparent border border-gold-500/30 hover:border-gold-500/80 transition-all duration-500">
+                    class="interactive-hover relative px-5 sm:px-8 py-2.5 sm:py-3 overflow-hidden rounded-full group bg-transparent border border-gold-500/30 hover:border-gold-500/80 transition-all duration-500">
                     <span
                         class="absolute inset-0 w-full h-full bg-gold-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                     <span
-                        class="relative flex items-center text-xs font-bold uppercase tracking-[0.15em] text-gold-300 group-hover:text-gold-200">
+                        class="relative flex items-center text-[0.65rem] sm:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] text-gold-300 group-hover:text-gold-200">
                         Reserve Table
                     </span>
                 </button>
             </div>
 
             <!-- Mobile Menu Button -->
-            <button class="md:hidden p-2 text-gold-400 interactive-hover z-50 relative" onclick="toggleMobileMenu()">
+            <button class="lg:hidden p-2 text-gold-400 interactive-hover z-50 relative" onclick="toggleMobileMenu()">
                 <span class="iconify w-6 h-6" data-icon="lucide:menu" id="menu-icon"></span>
             </button>
         </div>
@@ -259,25 +281,24 @@
 
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu"
-        class="fixed inset-0 bg-maroon-950/95 backdrop-blur-xl z-40 hidden flex-col items-center justify-center space-y-8 opacity-0 transition-opacity duration-300">
-        <nav class="flex flex-col items-center space-y-8 font-serif text-2xl text-gold-300">
+        class="fixed inset-0 bg-maroon-950/95 backdrop-blur-xl z-40 hidden flex-col items-center justify-center space-y-6 sm:space-y-8 opacity-0 transition-opacity duration-300">
+        <nav class="flex flex-col items-center space-y-6 sm:space-y-8 font-serif text-xl sm:text-2xl text-gold-300">
             <a href="#signature" onclick="toggleMobileMenu()" class="hover:text-white transition-colors">Signatures</a>
             <a href="#why-us" onclick="toggleMobileMenu()" class="hover:text-white transition-colors">Philosophy</a>
             <a href="#location" onclick="toggleMobileMenu()" class="hover:text-white transition-colors">Visit</a>
         </nav>
         <button onclick="toggleMobileMenu(); toggleModal(true)"
-            class="px-8 py-3 rounded-full bg-accent-red text-white text-sm font-bold uppercase tracking-widest shadow-lg">
+            class="px-6 sm:px-8 py-3 rounded-full bg-accent-red text-white text-xs sm:text-sm font-bold uppercase tracking-widest shadow-lg">
             Reserve Table
         </button>
     </div>
 
     <!-- Hero Section -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 overflow-hidden">
         <!-- Parallax Background -->
         <div class="absolute inset-0 -z-20">
             <div class="absolute inset-0 bg-maroon-950/40 z-10"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-maroon-950 via-maroon-950/30 to-transparent z-10"></div>
-            <!-- Radial overlay for focus -->
             <div
                 class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0F0101_100%)] z-10 opacity-70">
             </div>
@@ -285,46 +306,46 @@
                 class="w-full h-full object-cover opacity-90 transform scale-105 motion-safe:animate-[pulse_10s_ease-in-out_infinite] transition-transform duration-100 ease-out">
         </div>
 
-        <div class="max-w-7xl w-full mx-auto px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center relative z-20">
+        <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-20 py-8 sm:py-12">
 
             <!-- Content (Left - Wider) -->
             <div id="hero-card"
-                class="lg:col-span-7 space-y-12 p-8 rounded-3xl bg-maroon-950/10 backdrop-blur-sm border border-white/5 shadow-2xl transition-transform duration-100 ease-out origin-center"
+                class="lg:col-span-7 space-y-6 sm:space-y-8 lg:space-y-12 p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-maroon-950/10 backdrop-blur-sm border border-white/5 shadow-2xl transition-transform duration-100 ease-out origin-center"
                 data-aos="fade-up" data-aos-duration="1200">
                 <div
-                    class="inline-flex items-center space-x-3 px-4 py-2 rounded-full border border-gold-500/20 bg-black/40 backdrop-blur-md">
+                    class="inline-flex items-center space-x-2 sm:space-x-3 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-gold-500/20 bg-black/40 backdrop-blur-md">
                     <span class="w-1.5 h-1.5 rounded-full bg-accent-red animate-pulse"></span>
-                    <span class="text-[0.65rem] uppercase tracking-[0.3em] text-gold-300/90 font-bold">Est. 2024 •
+                    <span class="text-[0.55rem] sm:text-[0.65rem] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gold-300/90 font-bold">Est. 2024 •
                         Kormangla</span>
                 </div>
 
                 <h1
-                    class="font-serif text-5xl sm:text-7xl lg:text-9xl font-medium leading-[0.9] lg:leading-[0.85] text-white tracking-tight drop-shadow-2xl">
+                    class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-medium leading-[0.9] text-white tracking-tight drop-shadow-2xl hero-title-main">
                     <span
                         class="block text-transparent bg-clip-text bg-gradient-to-b from-white to-neutral-400 opacity-90">Crafted</span>
                     <span
-                        class="block italic text-gold-400 pl-2 md:pl-6 animate-text-shimmer bg-[linear-gradient(110deg,#FFD700,45%,#FFF,55%,#FFD700)] bg-[length:250%_100%] text-transparent bg-clip-text filter drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">Silence,</span>
+                        class="block italic text-gold-400 pl-1 sm:pl-2 md:pl-6 animate-text-shimmer bg-[linear-gradient(110deg,#FFD700,45%,#FFF,55%,#FFD700)] bg-[length:250%_100%] text-transparent bg-clip-text filter drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">Silence,</span>
                     <span
-                        class="block font-sans font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 tracking-tighter mt-2">Served
+                        class="block font-sans font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 tracking-tighter mt-1 sm:mt-2">Served
                         Loud.</span>
                 </h1>
 
                 <p
-                    class="text-lg md:text-xl text-neutral-200 font-light max-w-lg leading-relaxed border-l-2 border-gold-500 py-2 pl-8 bg-gradient-to-r from-white/5 to-transparent rounded-r-lg">
+                    class="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-200 font-light max-w-lg leading-relaxed border-l-2 border-gold-500 py-2 pl-4 sm:pl-6 lg:pl-8 bg-gradient-to-r from-white/5 to-transparent rounded-r-lg">
                     Where the misty hills of the Himalayas meet the refined palate of modern luxury. Experience the art
                     of the dumpling.
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-6 pt-4">
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-6 pt-2 sm:pt-4">
                     <button onclick="toggleModal(true)"
-                        class="interactive-hover group px-10 py-5 rounded-full bg-accent-red text-white font-bold uppercase tracking-widest text-xs hover:bg-red-700 transition-all duration-300 shadow-[0_10px_30px_rgba(227,24,55,0.3)] hover:shadow-[0_15px_40px_rgba(227,24,55,0.5)] transform hover:-translate-y-1">
-                        <span class="flex items-center gap-3">
+                        class="interactive-hover group px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full bg-accent-red text-white font-bold uppercase tracking-wider sm:tracking-widest text-[0.65rem] sm:text-xs hover:bg-red-700 transition-all duration-300 shadow-[0_10px_30px_rgba(227,24,55,0.3)] hover:shadow-[0_15px_40px_rgba(227,24,55,0.5)] transform hover:-translate-y-1 text-center">
+                        <span class="flex items-center justify-center gap-2 sm:gap-3">
                             Make Reservation
-                            <span class="iconify w-4 h-4" data-icon="lucide:arrow-right"></span>
+                            <span class="iconify w-3 h-3 sm:w-4 sm:h-4" data-icon="lucide:arrow-right"></span>
                         </span>
                     </button>
                     <a href="#signature"
-                        class="interactive-hover group px-10 py-5 rounded-full border border-white/20 text-white font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-maroon-950 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md">
+                        class="interactive-hover group px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 rounded-full border border-white/20 text-white font-bold uppercase tracking-wider sm:tracking-widest text-[0.65rem] sm:text-xs hover:bg-white hover:text-maroon-950 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md text-center">
                         View Menu
                     </a>
                 </div>
@@ -337,7 +358,6 @@
                     <div
                         class="absolute inset-0 bg-gold-500/10 rounded-full blur-3xl transform translate-x-10 translate-y-10">
                     </div>
-                    <!-- Platter Image -->
                     <img src="assets/momo_platter.png" id="hero-platter"
                         class="relative z-20 w-full h-full object-contain drop-shadow-2xl filter contrast-125 saturate-110 transition-transform duration-100 ease-out"
                         alt="Royal Platter">
@@ -347,47 +367,47 @@
     </section>
 
     <!-- Signatures Section -->
-    <section id="signature" class="py-16 md:py-24 lg:py-32 bg-maroon-950 relative z-10">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8" data-aos="fade-up">
+    <section id="signature" class="py-12 sm:py-16 md:py-24 lg:py-32 bg-maroon-950 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 sm:mb-16 lg:mb-20 gap-4 sm:gap-6 lg:gap-8" data-aos="fade-up">
                 <div>
-                    <span class="text-xs uppercase tracking-[0.4em] text-gold-500 font-bold block mb-2">The
+                    <span class="text-[0.65rem] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-gold-500 font-bold block mb-2">The
                         Collection</span>
-                    <h2 class="font-serif text-3xl sm:text-4xl sm:text-6xl text-white leading-none">Signature<br /><span
+                    <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white leading-none">Signature<br /><span
                             class="text-neutral-500 italic">Creations</span></h2>
                 </div>
                 <a href="#"
-                    class="interactive-hover inline-flex items-center text-xs uppercase tracking-widest text-gold-400 hover:text-white transition-colors pb-1 border-b border-gold-400/30 hover:border-white">
+                    class="interactive-hover inline-flex items-center text-[0.65rem] sm:text-xs uppercase tracking-widest text-gold-400 hover:text-white transition-colors pb-1 border-b border-gold-400/30 hover:border-white">
                     View Full Menu <span class="iconify ml-2" data-icon="lucide:arrow-right"></span>
                 </a>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-10">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-y-16 lg:gap-x-10">
 
                 <!-- Card 1 -->
                 <div class="group interactive-hover" data-aos="fade-up" data-aos-delay="0">
-                    <div class="relative aspect-[4/5] rounded-t-full rounded-b-xl overflow-hidden mb-6">
+                    <div class="relative aspect-[4/5] rounded-t-full rounded-b-xl overflow-hidden mb-4 sm:mb-6">
                         <div
                             class="absolute inset-0 bg-gradient-to-b from-transparent to-maroon-950/90 z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500">
                         </div>
                         <img src="assets/white_momo.png"
                             class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                             alt="White Truffle Momo">
-                        <div class="absolute top-4 right-4 z-20">
+                        <div class="absolute top-3 sm:top-4 right-3 sm:right-4 z-20">
                             <span
-                                class="bg-gold-500 text-maroon-950 text-[0.6rem] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Bestseller</span>
+                                class="bg-gold-500 text-maroon-950 text-[0.5rem] sm:text-[0.6rem] font-bold px-2 sm:px-3 py-1 rounded-full uppercase tracking-widest">Bestseller</span>
                         </div>
                     </div>
                     <div>
                         <div class="flex justify-between items-baseline mb-2">
-                            <h3 class="font-serif text-2xl text-white group-hover:text-gold-400 transition-colors">
+                            <h3 class="font-serif text-xl sm:text-2xl text-white group-hover:text-gold-400 transition-colors">
                                 Imperial Truffle</h3>
-                            <span class="text-gold-500/80 font-serif Italic text-xl">₹349</span>
+                            <span class="text-gold-500/80 font-serif italic text-lg sm:text-xl">₹349</span>
                         </div>
-                        <p class="text-sm text-neutral-400 font-light leading-relaxed mb-4 line-clamp-2">Delicate
+                        <p class="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed mb-3 sm:mb-4 line-clamp-2">Delicate
                             crystal skin, wild mushroom duxelle, finished with 24k gold leaf and white truffle oil.</p>
                         <button
-                            class="text-xs uppercase tracking-widest text-white/50 group-hover:text-accent-red transition-colors flex items-center">
+                            class="text-[0.65rem] sm:text-xs uppercase tracking-widest text-white/50 group-hover:text-accent-red transition-colors flex items-center">
                             Add to Order <span
                                 class="iconify ml-2 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-1"
                                 data-icon="lucide:plus"></span>
@@ -397,7 +417,7 @@
 
                 <!-- Card 2 -->
                 <div class="group interactive-hover" data-aos="fade-up" data-aos-delay="100">
-                    <div class="relative aspect-[4/5] rounded-t-full rounded-b-xl overflow-hidden mb-6">
+                    <div class="relative aspect-[4/5] rounded-t-full rounded-b-xl overflow-hidden mb-4 sm:mb-6">
                         <div
                             class="absolute inset-0 bg-gradient-to-b from-transparent to-maroon-950/90 z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500">
                         </div>
@@ -407,14 +427,14 @@
                     </div>
                     <div>
                         <div class="flex justify-between items-baseline mb-2">
-                            <h3 class="font-serif text-2xl text-white group-hover:text-gold-400 transition-colors">
+                            <h3 class="font-serif text-xl sm:text-2xl text-white group-hover:text-gold-400 transition-colors">
                                 Smoked Ruby</h3>
-                            <span class="text-gold-500/80 font-serif Italic text-xl">₹299</span>
+                            <span class="text-gold-500/80 font-serif italic text-lg sm:text-xl">₹299</span>
                         </div>
-                        <p class="text-sm text-neutral-400 font-light leading-relaxed mb-4 line-clamp-2">Charcoal-smoked
+                        <p class="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed mb-3 sm:mb-4 line-clamp-2">Charcoal-smoked
                             chicken marinated in our secret Kashmiri chilli paste, served with mint foam.</p>
                         <button
-                            class="text-xs uppercase tracking-widest text-white/50 group-hover:text-accent-red transition-colors flex items-center">
+                            class="text-[0.65rem] sm:text-xs uppercase tracking-widest text-white/50 group-hover:text-accent-red transition-colors flex items-center">
                             Add to Order <span
                                 class="iconify ml-2 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-1"
                                 data-icon="lucide:plus"></span>
@@ -423,8 +443,8 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="group interactive-hover" data-aos="fade-up" data-aos-delay="200">
-                    <div class="relative aspect-[4/5] rounded-t-full rounded-b-xl overflow-hidden mb-6">
+                <div class="group interactive-hover sm:col-span-2 lg:col-span-1 sm:max-w-md sm:mx-auto lg:max-w-none" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative aspect-[4/5] rounded-t-full rounded-b-xl overflow-hidden mb-4 sm:mb-6">
                         <div
                             class="absolute inset-0 bg-gradient-to-b from-transparent to-maroon-950/90 z-10 opacity-60 group-hover:opacity-40 transition-opacity duration-500">
                         </div>
@@ -434,14 +454,14 @@
                     </div>
                     <div>
                         <div class="flex justify-between items-baseline mb-2">
-                            <h3 class="font-serif text-2xl text-white group-hover:text-gold-400 transition-colors">
+                            <h3 class="font-serif text-xl sm:text-2xl text-white group-hover:text-gold-400 transition-colors">
                                 Dragon Fire</h3>
-                            <span class="text-gold-500/80 font-serif Italic text-xl">₹279</span>
+                            <span class="text-gold-500/80 font-serif italic text-lg sm:text-xl">₹279</span>
                         </div>
-                        <p class="text-sm text-neutral-400 font-light leading-relaxed mb-4 line-clamp-2">Wok-tossed in
+                        <p class="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed mb-3 sm:mb-4 line-clamp-2">Wok-tossed in
                             artisanal Schezwan sauce, glazed with sesame oil and topped with micro-coriander.</p>
                         <button
-                            class="text-xs uppercase tracking-widest text-white/50 group-hover:text-accent-red transition-colors flex items-center">
+                            class="text-[0.65rem] sm:text-xs uppercase tracking-widest text-white/50 group-hover:text-accent-red transition-colors flex items-center">
                             Add to Order <span
                                 class="iconify ml-2 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-1"
                                 data-icon="lucide:plus"></span>
@@ -450,86 +470,84 @@
                 </div>
             </div>
         </div>
-
-
     </section>
 
     <!-- Quote Section -->
     <section
-        class="relative py-20 md:py-32 lg:py-40 bg-fixed bg-cover bg-center flex items-center justify-center bg-maroon-950"
+        class="relative py-16 sm:py-20 md:py-32 lg:py-40 bg-fixed bg-cover bg-center flex items-center justify-center bg-maroon-950"
         style="background-image: url('assets/hero_momo.png');">
         <div class="absolute inset-0 bg-maroon-950/80"></div>
-        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto" data-aos="zoom-in">
-            <span class="text-gold-500 text-6xl font-serif block mb-6">“</span>
-            <h2 class="font-serif text-3xl md:text-5xl lg:text-6xl text-white leading-tight mb-8">
+        <div class="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto" data-aos="zoom-in">
+            <span class="text-gold-500 text-4xl sm:text-5xl md:text-6xl font-serif block mb-4 sm:mb-6">"</span>
+            <h2 class="font-serif text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl text-white leading-tight mb-6 sm:mb-8">
                 Food represents the deepest form of intimacy. We don't just feed you; we share our soul.
             </h2>
-            <div class="flex items-center justify-center gap-4">
-                <div class="w-12 h-[1px] bg-accent-red"></div>
-                <p class="text-gold-300 uppercase tracking-[0.2em] text-sm font-bold">Head Chef, Open Momos</p>
-                <div class="w-12 h-[1px] bg-accent-red"></div>
+            <div class="flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
+                <div class="w-8 sm:w-12 h-[1px] bg-accent-red"></div>
+                <p class="text-gold-300 uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[0.65rem] sm:text-sm font-bold">Head Chef, Open Momos</p>
+                <div class="w-8 sm:w-12 h-[1px] bg-accent-red"></div>
             </div>
         </div>
     </section>
 
     <!-- Location Section -->
     <section id="location" class="relative bg-maroon-950 border-t border-gold-500/5">
-        <div class="grid lg:grid-cols-2 min-h-[600px]">
+        <div class="grid lg:grid-cols-2 min-h-[500px] lg:min-h-[600px]">
             <!-- Interactive Map Side -->
-            <div class="relative h-[300px] lg:h-full bg-neutral-900 group overflow-hidden">
+            <div class="relative h-[250px] sm:h-[300px] lg:h-full bg-neutral-900 group overflow-hidden order-2 lg:order-1">
                 <iframe title="Location"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.021942571764!2d77.63713847506929!3d12.969810887349902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1409a93b20bd%3A0x4da751b4fc0adc18!2sIndiranagar%2C%20Bengaluru!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                     class="w-full h-full filter grayscale contrast-125 opacity-50 group-hover:opacity-80 transition-opacity duration-700 invert"
                     style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                <div class="absolute bottom-6 left-6 z-10">
+                <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 z-10">
                     <button
-                        class="bg-white text-maroon-950 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-gold-400 transition-colors">Open
+                        class="bg-white text-maroon-950 px-4 sm:px-6 py-2 rounded-full text-[0.65rem] sm:text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-gold-400 transition-colors">Open
                         in Maps</button>
                 </div>
             </div>
 
             <!-- Info Side -->
-            <div class="flex items-center justify-center p-8 lg:p-24 bg-maroon-950 relative">
-                <div class="space-y-12 max-w-md w-full" data-aos="fade-left">
+            <div class="flex items-center justify-center p-6 sm:p-8 lg:p-16 xl:p-24 bg-maroon-950 relative order-1 lg:order-2">
+                <div class="space-y-8 sm:space-y-10 lg:space-y-12 max-w-md w-full" data-aos="fade-left">
                     <div>
-                        <h3 class="font-serif text-3xl md:text-4xl text-white mb-2">Visit Us</h3>
-                        <p class="text-neutral-500">Walk-ins welcome, reservations recommended.</p>
+                        <h3 class="font-serif text-2xl sm:text-3xl md:text-4xl text-white mb-2">Visit Us</h3>
+                        <p class="text-neutral-500 text-sm sm:text-base">Walk-ins welcome, reservations recommended.</p>
                     </div>
 
-                    <div class="space-y-8">
-                        <div class="flex gap-6 group interactive-hover">
+                    <div class="space-y-6 sm:space-y-8">
+                        <div class="flex gap-4 sm:gap-6 group interactive-hover">
                             <div
-                                class="w-12 h-12 rounded-full border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:bg-gold-500 group-hover:text-maroon-900 transition-all">
-                                <span class="iconify w-5 h-5" data-icon="lucide:map-pin"></span>
+                                class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:bg-gold-500 group-hover:text-maroon-900 transition-all flex-shrink-0">
+                                <span class="iconify w-4 h-4 sm:w-5 sm:h-5" data-icon="lucide:map-pin"></span>
                             </div>
                             <div>
-                                <p class="text-neutral-400 text-xs uppercase tracking-widest mb-1">Address</p>
-                                <p class="text-white text-lg font-serif">Aurora Food Street, Indiranagar</p>
-                                <p class="text-neutral-500 text-sm">3rd Floor, Bengaluru</p>
+                                <p class="text-neutral-400 text-[0.65rem] sm:text-xs uppercase tracking-widest mb-1">Address</p>
+                                <p class="text-white text-base sm:text-lg font-serif">Aurora Food Street, Indiranagar</p>
+                                <p class="text-neutral-500 text-xs sm:text-sm">3rd Floor, Bengaluru</p>
                             </div>
                         </div>
 
-                        <div class="flex gap-6 group interactive-hover">
+                        <div class="flex gap-4 sm:gap-6 group interactive-hover">
                             <div
-                                class="w-12 h-12 rounded-full border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:bg-gold-500 group-hover:text-maroon-900 transition-all">
-                                <span class="iconify w-5 h-5" data-icon="lucide:clock"></span>
+                                class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:bg-gold-500 group-hover:text-maroon-900 transition-all flex-shrink-0">
+                                <span class="iconify w-4 h-4 sm:w-5 sm:h-5" data-icon="lucide:clock"></span>
                             </div>
                             <div>
-                                <p class="text-neutral-400 text-xs uppercase tracking-widest mb-1">Hours</p>
-                                <p class="text-white text-lg font-serif">Mon - Sun</p>
-                                <p class="text-neutral-500 text-sm">12:00 PM – 11:30 PM</p>
+                                <p class="text-neutral-400 text-[0.65rem] sm:text-xs uppercase tracking-widest mb-1">Hours</p>
+                                <p class="text-white text-base sm:text-lg font-serif">Mon - Sun</p>
+                                <p class="text-neutral-500 text-xs sm:text-sm">12:00 PM – 11:30 PM</p>
                             </div>
                         </div>
 
-                        <div class="flex gap-6 group interactive-hover">
+                        <div class="flex gap-4 sm:gap-6 group interactive-hover">
                             <div
-                                class="w-12 h-12 rounded-full border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:bg-gold-500 group-hover:text-maroon-900 transition-all">
-                                <span class="iconify w-5 h-5" data-icon="lucide:phone"></span>
+                                class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold-500/30 flex items-center justify-center text-gold-400 group-hover:bg-gold-500 group-hover:text-maroon-900 transition-all flex-shrink-0">
+                                <span class="iconify w-4 h-4 sm:w-5 sm:h-5" data-icon="lucide:phone"></span>
                             </div>
                             <div>
-                                <p class="text-neutral-400 text-xs uppercase tracking-widest mb-1">Contact</p>
-                                <p class="text-white text-lg font-serif">+91 98765 43210</p>
-                                <a href="#" class="text-accent-red text-sm hover:underline">hello@openmomos.co</a>
+                                <p class="text-neutral-400 text-[0.65rem] sm:text-xs uppercase tracking-widest mb-1">Contact</p>
+                                <p class="text-white text-base sm:text-lg font-serif">+91 98765 43210</p>
+                                <a href="#" class="text-accent-red text-xs sm:text-sm hover:underline">hello@openmomos.co</a>
                             </div>
                         </div>
                     </div>
@@ -540,14 +558,14 @@
 
     <!-- Floating Sticky Nav (Pill) -->
     <div id="floating-nav"
-        class="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 translate-y-20 opacity-0 transition-all duration-500">
-        <div class="glass-card rounded-full p-2 flex items-center gap-2 shadow-2xl bg-maroon-950/80">
+        class="fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-40 translate-y-20 opacity-0 transition-all duration-500">
+        <div class="glass-card rounded-full p-1.5 sm:p-2 flex items-center gap-1.5 sm:gap-2 shadow-2xl bg-maroon-950/80">
             <button onclick="toggleModal(true)"
-                class="interactive-hover px-6 py-3 rounded-full bg-accent-red text-white text-xs font-bold uppercase tracking-widest hover:bg-red-600 transition-colors shadow-lg">
+                class="interactive-hover px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-accent-red text-white text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest hover:bg-red-600 transition-colors shadow-lg">
                 Reserve
             </button>
             <a href="#signature"
-                class="interactive-hover px-6 py-3 rounded-full text-gold-300 text-xs font-bold uppercase tracking-widest hover:bg-white/5 transition-colors">
+                class="interactive-hover px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-gold-300 text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest hover:bg-white/5 transition-colors">
                 Menu
             </a>
         </div>
@@ -556,32 +574,32 @@
     <!-- Reservation Modal -->
     <div id="reservation-modal" class="fixed inset-0 z-[1000] hidden opacity-0 transition-opacity duration-300">
         <div class="absolute inset-0 bg-maroon-950/90 backdrop-blur-md" onclick="toggleModal(false)"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg p-4">
-            <div class="glass-card bg-maroon-900/50 p-8 rounded-2xl relative border-gold-500/20 transform scale-95 transition-transform duration-300"
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg p-3 sm:p-4 max-h-[90vh] overflow-y-auto">
+            <div class="glass-card bg-maroon-900/50 p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl relative border-gold-500/20 transform scale-95 transition-transform duration-300"
                 id="modal-content">
                 <!-- Close Button -->
                 <button onclick="toggleModal(false)"
-                    class="absolute top-4 right-4 text-neutral-400 hover:text-white interactive-hover">
-                    <span class="iconify w-6 h-6" data-icon="lucide:x"></span>
+                    class="absolute top-3 sm:top-4 right-3 sm:right-4 text-neutral-400 hover:text-white interactive-hover">
+                    <span class="iconify w-5 h-5 sm:w-6 sm:h-6" data-icon="lucide:x"></span>
                 </button>
 
-                <div class="text-center mb-8">
-                    <span class="text-gold-400 text-xs uppercase tracking-[0.2em] font-bold">Book a Table</span>
-                    <h3 class="font-serif text-3xl text-white mt-2">Reserve Your Experience</h3>
+                <div class="text-center mb-6 sm:mb-8">
+                    <span class="text-gold-400 text-[0.65rem] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold">Book a Table</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl text-white mt-2">Reserve Your Experience</h3>
                 </div>
 
-                <form class="space-y-4"
+                <form class="space-y-3 sm:space-y-4"
                     onsubmit="event.preventDefault(); alert('Reservation Request Sent! We will confirm shortly.'); toggleModal(false);">
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         <div>
-                            <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-2">Date</label>
+                            <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Date</label>
                             <input type="date"
-                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition-colors cursor-none">
+                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
                         </div>
                         <div>
-                            <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-2">Guests</label>
+                            <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Guests</label>
                             <select
-                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition-colors cursor-none">
+                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
                                 <option>2 Guests</option>
                                 <option>3 Guests</option>
                                 <option>4 Guests</option>
@@ -590,51 +608,51 @@
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-2">Name</label>
+                        <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Name</label>
                         <input type="text" placeholder="Your Name"
-                            class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition-colors cursor-none">
+                            class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
                     </div>
                     <div>
-                        <label class="block text-xs uppercase tracking-widest text-neutral-400 mb-2">Phone</label>
+                        <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Phone</label>
                         <input type="tel" placeholder="+91 ..."
-                            class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition-colors cursor-none">
+                            class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
                     </div>
                     <button
-                        class="interactive-hover w-full py-4 mt-4 bg-gradient-to-r from-gold-600 to-gold-400 text-maroon-950 font-bold uppercase tracking-widest rounded-lg shadow-lg hover:brightness-110 transition-all">Confirm
+                        class="interactive-hover w-full py-3 sm:py-4 mt-3 sm:mt-4 bg-gradient-to-r from-gold-600 to-gold-400 text-maroon-950 font-bold uppercase tracking-wider sm:tracking-widest text-xs sm:text-sm rounded-lg shadow-lg hover:brightness-110 transition-all">Confirm
                         Booking</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <section id="chutney-scroll" class="h-[150vh] md:h-[200vh] relative bg-neutral-900 border-t border-white/5">
+    <section id="chutney-scroll" class="h-[120vh] sm:h-[150vh] md:h-[200vh] relative bg-neutral-900 border-t border-white/5">
         <div class="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute top-1/4 z-20 text-center mix-blend-difference pointer-events-none">
-                <h2 class="font-serif text-5xl md:text-6xl lg:text-8xl text-white opacity-0 transform translate-y-10 transition-all duration-700 ease-out"
+            <div class="absolute top-1/4 z-20 text-center mix-blend-difference pointer-events-none px-4">
+                <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl text-white opacity-0 transform translate-y-10 transition-all duration-700 ease-out"
                     id="drip-text">
                     Pure <span class="italic text-gold-500">Essence</span>
                 </h2>
             </div>
 
             <div id="chutney-sprite"
-                class="w-[600px] max-w-full h-[600px] bg-[url('assets/chutney_drip_spritesheet.png')] bg-no-repeat bg-[length:400%_400%] bg-left-top relative z-10 filter contrast-110">
+                class="w-[300px] sm:w-[400px] md:w-[500px] lg:w-[600px] max-w-[90vw] h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-[url('assets/chutney_drip_spritesheet.png')] bg-no-repeat bg-[length:400%_400%] bg-left-top relative z-10 filter contrast-110">
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-maroon-950 py-12 md:py-20 border-t border-gold-500/5 text-center relative z-10">
-        <div class="max-w-7xl mx-auto px-6 overflow-hidden">
-            <h2 class="font-serif text-[15vw] md:text-8xl text-white/5 font-bold mb-[-20px] md:mb-[-30px]">OPEN MOMOS
+    <footer class="bg-maroon-950 py-10 sm:py-12 md:py-20 border-t border-gold-500/5 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 overflow-hidden">
+            <h2 class="font-serif text-[12vw] sm:text-[15vw] md:text-8xl text-white/5 font-bold mb-[-15px] sm:mb-[-20px] md:mb-[-30px]">OPEN MOMOS
             </h2>
             <div class="relative z-10 flex flex-col items-center">
                 <div
-                    class="w-12 h-12 rounded-full border border-gold-500 bg-maroon-900 flex items-center justify-center mb-6">
-                    <span class="font-serif text-2xl font-bold text-white">M</span>
+                    class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gold-500 bg-maroon-900 flex items-center justify-center mb-4 sm:mb-6">
+                    <span class="font-serif text-xl sm:text-2xl font-bold text-white">M</span>
                 </div>
-                <p class="text-neutral-500 text-sm max-w-md mx-auto mb-8">Elevating the humble dumpling to an art form.
+                <p class="text-neutral-500 text-xs sm:text-sm max-w-md mx-auto mb-6 sm:mb-8 px-4">Elevating the humble dumpling to an art form.
                     Join us for a journey of taste.</p>
-                <p class="text-[0.6rem] text-neutral-600 uppercase tracking-widest">&copy; <span id="year">2024</span>
+                <p class="text-[0.5rem] sm:text-[0.6rem] text-neutral-600 uppercase tracking-widest">&copy; <span id="year">2024</span>
                     Open Momos. All rights
                     reserved.</p>
             </div>
@@ -653,7 +671,6 @@
             easing: 'ease-out-cubic',
         });
 
-        // Update Year
         // Update Year
         const yearEl = document.getElementById('year');
         if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -674,9 +691,7 @@
         const fallingSauce = document.getElementById('falling-sauce');
         if (fallingSauce) {
             window.addEventListener('scroll', () => {
-                const yPos = window.scrollY * 0.4; // Moves slower than scroll = appearing to slide
-                // Actually, to make it fall *into* the view as we scroll down, we want it to move DOWN relative to the container.
-                // Since the container scrolls UP, to move down relative to container means translating +Y.
+                const yPos = window.scrollY * 0.4;
                 fallingSauce.style.transform = `translateY(${yPos}px)`;
             });
         }
@@ -685,35 +700,37 @@
         const header = document.querySelector('header');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                header.classList.add('bg-maroon-950/90', 'backdrop-blur-md', 'py-4', 'shadow-lg');
-                header.classList.remove('py-6', 'border-transparent');
+                header.classList.add('bg-maroon-950/90', 'backdrop-blur-md', 'py-3', 'sm:py-4', 'shadow-lg');
+                header.classList.remove('py-4', 'sm:py-6', 'border-transparent');
                 header.classList.add('border-gold-500/10');
             } else {
-                header.classList.remove('bg-maroon-950/90', 'backdrop-blur-md', 'py-4', 'shadow-lg', 'border-gold-500/10');
-                header.classList.add('py-6', 'border-transparent');
+                header.classList.remove('bg-maroon-950/90', 'backdrop-blur-md', 'py-3', 'sm:py-4', 'shadow-lg', 'border-gold-500/10');
+                header.classList.add('py-4', 'sm:py-6', 'border-transparent');
             }
         });
 
-        // Custom Cursor Logic
+        // Custom Cursor Logic - Only for non-touch devices
         const cursor = document.getElementById('cursor');
         const cursorDot = document.getElementById('cursor-dot');
         const interactiveElements = document.querySelectorAll('.interactive-hover, a, button, input, select');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            cursorDot.style.left = e.clientX + 'px';
-            cursorDot.style.top = e.clientY + 'px';
-        });
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+            });
 
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.classList.add('hovered');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hovered');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hovered');
+                });
             });
-            el.addEventListener('mouseleave', () => {
-                cursor.classList.remove('hovered');
-            });
-        });
+        }
 
         // Preloader Logic
         window.addEventListener('load', () => {
@@ -735,6 +752,7 @@
 
             if (show) {
                 modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
                 void modal.offsetWidth;
                 modal.style.opacity = '1';
                 content.classList.remove('scale-95');
@@ -743,6 +761,7 @@
                 modal.style.opacity = '0';
                 content.classList.remove('scale-100');
                 content.classList.add('scale-95');
+                document.body.style.overflow = '';
                 setTimeout(() => {
                     modal.classList.add('hidden');
                 }, 300);
@@ -755,24 +774,22 @@
             const icon = document.getElementById('menu-icon');
 
             if (menu.classList.contains('hidden')) {
-                // Open
                 menu.classList.remove('hidden');
-                // Trigger reflow
+                menu.classList.add('flex');
+                document.body.style.overflow = 'hidden';
                 void menu.offsetWidth;
                 menu.classList.remove('opacity-0');
                 icon.setAttribute('data-icon', 'lucide:x');
             } else {
-                // Close
                 menu.classList.add('opacity-0');
                 icon.setAttribute('data-icon', 'lucide:menu');
+                document.body.style.overflow = '';
                 setTimeout(() => {
                     menu.classList.add('hidden');
+                    menu.classList.remove('flex');
                 }, 300);
             }
         }
-
-
-
 
         // Chutney Scroll Animation
         const scrollSection = document.getElementById('chutney-scroll');
@@ -785,40 +802,27 @@
                 const rect = scrollSection.getBoundingClientRect();
                 const sectionHeight = scrollSection.offsetHeight - window.innerHeight;
 
-                // Calculate progress (0 to 1) based on how much has scrolled INTO and THROUGH the section
-                // We want animation to start when section hits top and end when it leaves.
                 let progress = -rect.top / sectionHeight;
-
-                // Clamp 0-1
                 progress = Math.max(0, Math.min(1, progress));
 
-                // 16 frames (0 to 15)
                 const totalFrames = 16;
                 const currentFrame = Math.floor(progress * (totalFrames - 1));
 
-                // Calculate Grid Position (4x4)
                 const col = currentFrame % 4;
                 const row = Math.floor(currentFrame / 4);
 
-                // 33.333% shift per frame (since 4 frames = 3 gaps = 100% / 3) 
-                // Actually for bg-position with % it interprets differently:
-                // 0% = left, 100% = right.
-                // 3 steps to get from 0 to 100: 0, 33.33, 66.66, 100.
                 const xPos = col * (100 / 3);
                 const yPos = row * (100 / 3);
 
                 sprite.style.backgroundPosition = `${xPos}% ${yPos}%`;
 
-                // Text Reveal logic
-                if (dripText && dripSub) {
+                if (dripText) {
                     if (progress > 0.2) {
                         dripText.style.opacity = '1';
                         dripText.style.transform = 'translateY(0)';
-                        dripSub.style.opacity = '1';
                     } else {
                         dripText.style.opacity = '0';
                         dripText.style.transform = 'translateY(10px)';
-                        dripSub.style.opacity = '0';
                     }
                 }
             });
