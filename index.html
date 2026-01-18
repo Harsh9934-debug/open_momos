@@ -260,81 +260,124 @@
     <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
         <!-- Parallax Background -->
         <div class="absolute inset-0 -z-20">
-            <div class="absolute inset-0 bg-maroon-950/20 z-10"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-maroon-950 via-transparent to-transparent z-10"></div>
-            <img src="assets/hero_momo.png" alt="Steamer Basket"
-                class="w-full h-full object-cover opacity-100 transform scale-105 motion-safe:animate-[pulse_10s_ease-in-out_infinite]">
+            <div class="absolute inset-0 bg-maroon-950/40 z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-maroon-950 via-maroon-950/30 to-transparent z-10"></div>
+            <!-- Radial overlay for focus -->
+            <div
+                class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0F0101_100%)] z-10 opacity-70">
+            </div>
+            <img src="assets/hero_momo.png" alt="Steamer Basket" id="hero-bg-img"
+                class="w-full h-full object-cover opacity-90 transform scale-105 motion-safe:animate-[pulse_10s_ease-in-out_infinite] transition-transform duration-100 ease-out">
         </div>
 
-        <div class="max-w-7xl w-full mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative z-20">
+        <div class="max-w-7xl w-full mx-auto px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center relative z-20">
 
-            <!-- Content -->
-            <div class="space-y-10" data-aos="fade-up" data-aos-duration="1200">
+            <!-- Content (Left - Wider) -->
+            <div id="hero-card"
+                class="lg:col-span-7 space-y-12 p-8 rounded-3xl bg-maroon-950/10 backdrop-blur-sm border border-white/5 shadow-2xl transition-transform duration-100 ease-out origin-center"
+                data-aos="fade-up" data-aos-duration="1200">
                 <div
-                    class="inline-flex items-center space-x-3 px-4 py-2 rounded-full border border-gold-500/20 bg-black/20 backdrop-blur-md">
-                    <span class="w-1.5 h-1.5 rounded-full bg-accent-red"></span>
-                    <span class="text-[0.65rem] uppercase tracking-[0.3em] text-gold-300/80">Est. 2024 •
+                    class="inline-flex items-center space-x-3 px-4 py-2 rounded-full border border-gold-500/20 bg-black/40 backdrop-blur-md">
+                    <span class="w-1.5 h-1.5 rounded-full bg-accent-red animate-pulse"></span>
+                    <span class="text-[0.65rem] uppercase tracking-[0.3em] text-gold-300/90 font-bold">Est. 2024 •
                         Kormangla</span>
                 </div>
 
-                <h1 class="font-serif text-6xl sm:text-7xl lg:text-8xl font-medium leading-[0.9] text-white">
+                <h1
+                    class="font-serif text-6xl sm:text-7xl lg:text-9xl font-medium leading-[0.85] text-white tracking-tight drop-shadow-2xl">
                     <span
-                        class="block text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-400">Crafted</span>
+                        class="block text-transparent bg-clip-text bg-gradient-to-b from-white to-neutral-400 opacity-90">Crafted</span>
                     <span
-                        class="block italic text-gold-400 pl-4 animate-text-shimmer bg-[linear-gradient(110deg,#FFD700,45%,#FFF,55%,#FFD700)] bg-[length:250%_100%] text-transparent bg-clip-text">Silence,</span>
+                        class="block italic text-gold-400 pl-2 md:pl-6 animate-text-shimmer bg-[linear-gradient(110deg,#FFD700,45%,#FFF,55%,#FFD700)] bg-[length:250%_100%] text-transparent bg-clip-text filter drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">Silence,</span>
                     <span
-                        class="block text-transparent bg-clip-text bg-gradient-to-br from-accent-red to-red-400">Served
+                        class="block font-sans font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 tracking-tighter mt-2">Served
                         Loud.</span>
                 </h1>
 
                 <p
-                    class="text-lg text-neutral-300 font-light max-w-md leading-relaxed border-l border-gold-500/50 pl-6">
-                    Where the misty hills of the Himalayas meet the refined palate of modern luxury.
+                    class="text-lg md:text-xl text-neutral-200 font-light max-w-lg leading-relaxed border-l-2 border-gold-500 py-2 pl-8 bg-gradient-to-r from-white/5 to-transparent rounded-r-lg">
+                    Where the misty hills of the Himalayas meet the refined palate of modern luxury. Experience the art
+                    of the dumpling.
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-6 pt-2">
+                <div class="flex flex-col sm:flex-row gap-6 pt-4">
                     <button onclick="toggleModal(true)"
                         class="interactive-hover group px-10 py-5 rounded-full bg-accent-red text-white font-bold uppercase tracking-widest text-xs hover:bg-red-700 transition-all duration-300 shadow-[0_10px_30px_rgba(227,24,55,0.3)] hover:shadow-[0_15px_40px_rgba(227,24,55,0.5)] transform hover:-translate-y-1">
-                        <span class="flex items-center">
+                        <span class="flex items-center gap-3">
                             Make Reservation
-                            <span class="iconify ml-2" data-icon="lucide:arrow-right"></span>
+                            <span class="iconify w-4 h-4" data-icon="lucide:arrow-right"></span>
                         </span>
                     </button>
+                    <a href="#signature"
+                        class="interactive-hover group px-10 py-5 rounded-full border border-white/20 text-white font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-maroon-950 transition-all duration-300 hover:-translate-y-1 backdrop-blur-md">
+                        View Menu
+                    </a>
                 </div>
             </div>
 
-            <!-- Visual Feature (Floating Platter with Falling Sauce) -->
-            <div class="relative hidden lg:block" data-aos="zoom-out" data-aos-duration="1400" data-aos-delay="200">
-                <div class="relative z-10 w-[600px] h-[600px] mx-auto animate-[float_8s_ease-in-out_infinite]">
-                    <div class="absolute inset-0 bg-gold-500/5 rounded-full blur-3xl"></div>
-
+            <!-- Visual Feature (Right - Tucked) -->
+            <div class="hidden lg:block lg:col-span-5 relative" data-aos="zoom-out" data-aos-duration="1400"
+                data-aos-delay="200">
+                <div class="relative z-10 w-[120%] -mr-20 animate-[float_8s_ease-in-out_infinite]">
+                    <div
+                        class="absolute inset-0 bg-gold-500/10 rounded-full blur-3xl transform translate-x-10 translate-y-10">
+                    </div>
                     <!-- Platter Image -->
-                    <img src="assets/momo_platter.png"
-                        class="relative z-20 w-full h-full object-contain drop-shadow-2xl filter contrast-110 saturate-110"
+                    <img src="assets/momo_platter.png" id="hero-platter"
+                        class="relative z-20 w-full h-full object-contain drop-shadow-2xl filter contrast-125 saturate-110 transition-transform duration-100 ease-out"
                         alt="Royal Platter">
                 </div>
             </div>
         </div>
 
+        <!-- Mouse Scroll Indicator -->
+        <div
+            class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-60 hover:opacity-100 transition-opacity">
+            <div class="w-[30px] h-[50px] rounded-full border-2 border-gold-400 flex justify-center pt-2">
+                <div class="w-1.5 h-1.5 rounded-full bg-gold-400 animate-[bounce_2s_infinite]"></div>
+            </div>
+            <span class="text-[0.5rem] uppercase tracking-[0.3em] text-gold-300 font-bold">Scroll</span>
+        </div>
+    </section>
 
+    <!-- Chutney Drip Animation Section -->
+    <section id="chutney-scroll" class="h-[200vh] relative bg-neutral-900 border-t border-white/5">
+        <div class="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+            <!-- Text Overlay -->
+            <div class="absolute top-1/4 z-20 text-center mix-blend-difference pointer-events-none">
+                <h2 class="font-serif text-6xl md:text-8xl text-white opacity-0 transform translate-y-10 transition-all duration-700 ease-out"
+                    id="drip-text">
+                    Pure <span class="italic text-gold-500">Essence</span>
+                </h2>
+                <p class="text-neutral-400 mt-4 opacity-0 transition-all duration-700 delay-200" id="drip-sub">
+                    Watch the flavor unfold.
+                </p>
+            </div>
+
+            <!-- Sprite Container -->
+            <div id="chutney-sprite"
+                class="w-[600px] h-[600px] bg-[url('assets/chutney_drip_spritesheet.png')] bg-no-repeat bg-[length:400%_400%] bg-left-top relative z-10 filter contrast-110">
+            </div>
+        </div>
     </section>
 
     <!-- Signatures Section -->
-    <section id="signature" class="py-32 bg-maroon-950 relative z-10">
+    <section id="signature" class="py-20 md:py-32 bg-maroon-950 relative z-10">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <!-- Subtle Header -->
-            <div class="flex flex-col items-center justify-center mb-24 text-center" data-aos="fade-up">
+            <div class="flex flex-col items-center justify-center mb-16 md:mb-24 text-center" data-aos="fade-up">
                 <span class="text-[0.6rem] uppercase tracking-[0.4em] text-gold-500/80 mb-4">The Collection</span>
-                <h2 class="font-serif text-5xl md:text-7xl text-white mb-6">Signature <span
+                <h2 class="font-serif text-4xl md:text-5xl lg:text-7xl text-white mb-6">Signature <span
                         class="italic text-gold-400">Edits</span></h2>
                 <div class="h-px w-20 bg-gradient-to-r from-transparent via-gold-500/50 to-transparent"></div>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
 
                 <!-- Card 1: Imperial Truffle -->
                 <div class="group relative" data-aos="fade-up" data-aos-delay="0">
-                    <div class="relative aspect-[3/4] overflow-hidden rounded-[2rem] bg-neutral-900 mb-8">
+                    <div
+                        class="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-[2rem] bg-neutral-900 mb-6 md:mb-8">
                         <!-- Image -->
                         <img src="assets/white_momo.png"
                             class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-in-out"
@@ -347,22 +390,22 @@
 
                         <!-- Price Badge (Minimal) -->
                         <div
-                            class="absolute top-6 right-6 backdrop-blur-md bg-white/10 border border-white/20 px-4 py-2 rounded-full">
-                            <span class="font-serif text-gold-300 italic text-lg">₹349</span>
+                            class="absolute top-4 right-4 md:top-6 md:right-6 backdrop-blur-md bg-white/10 border border-white/20 px-3 py-1 md:px-4 md:py-2 rounded-full">
+                            <span class="font-serif text-gold-300 italic text-base md:text-lg">₹349</span>
                         </div>
                     </div>
 
                     <div class="text-center px-4 relative">
                         <!-- Decor Line -->
                         <div
-                            class="absolute -top-4 left-1/2 -translate-x-1/2 w-0 h-px bg-gold-500/50 group-hover:w-16 transition-all duration-500">
+                            class="hidden md:block absolute -top-4 left-1/2 -translate-x-1/2 w-0 h-px bg-gold-500/50 group-hover:w-16 transition-all duration-500">
                         </div>
 
                         <h3
-                            class="font-serif text-3xl text-white mb-3 group-hover:text-gold-400 transition-colors duration-300">
+                            class="font-serif text-2xl md:text-3xl text-white mb-2 md:mb-3 group-hover:text-gold-400 transition-colors duration-300">
                             Imperial Truffle</h3>
                         <p
-                            class="text-neutral-400 text-sm font-light leading-relaxed mb-6 max-w-xs mx-auto line-clamp-2 group-hover:text-neutral-300 transition-colors">
+                            class="text-neutral-400 text-sm font-light leading-relaxed mb-4 md:mb-6 max-w-xs mx-auto line-clamp-2 group-hover:text-neutral-300 transition-colors">
                             Delicate crystal skin, wild mushroom duxelle, finished with 24k gold leaf.
                         </p>
 
@@ -374,8 +417,9 @@
                 </div>
 
                 <!-- Card 2: Smoked Ruby -->
-                <div class="group relative" data-aos="fade-up" data-aos-delay="150">
-                    <div class="relative aspect-[3/4] overflow-hidden rounded-[2rem] bg-neutral-900 mb-8">
+                <div class="group relative" data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-[2rem] bg-neutral-900 mb-6 md:mb-8">
                         <img src="assets/tandoori_momo.png"
                             class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-in-out"
                             alt="Smoked Ruby">
@@ -383,20 +427,20 @@
                             class="absolute inset-0 bg-gradient-to-t from-maroon-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500">
                         </div>
                         <div
-                            class="absolute top-6 right-6 backdrop-blur-md bg-white/10 border border-white/20 px-4 py-2 rounded-full">
-                            <span class="font-serif text-gold-300 italic text-lg">₹299</span>
+                            class="absolute top-4 right-4 md:top-6 md:right-6 backdrop-blur-md bg-white/10 border border-white/20 px-3 py-1 md:px-4 md:py-2 rounded-full">
+                            <span class="font-serif text-gold-300 italic text-base md:text-lg">₹299</span>
                         </div>
                     </div>
 
                     <div class="text-center px-4 relative">
                         <div
-                            class="absolute -top-4 left-1/2 -translate-x-1/2 w-0 h-px bg-gold-500/50 group-hover:w-16 transition-all duration-500">
+                            class="hidden md:block absolute -top-4 left-1/2 -translate-x-1/2 w-0 h-px bg-gold-500/50 group-hover:w-16 transition-all duration-500">
                         </div>
                         <h3
-                            class="font-serif text-3xl text-white mb-3 group-hover:text-gold-400 transition-colors duration-300">
+                            class="font-serif text-2xl md:text-3xl text-white mb-2 md:mb-3 group-hover:text-gold-400 transition-colors duration-300">
                             Smoked Ruby</h3>
                         <p
-                            class="text-neutral-400 text-sm font-light leading-relaxed mb-6 max-w-xs mx-auto line-clamp-2 group-hover:text-neutral-300 transition-colors">
+                            class="text-neutral-400 text-sm font-light leading-relaxed mb-4 md:mb-6 max-w-xs mx-auto line-clamp-2 group-hover:text-neutral-300 transition-colors">
                             Charcoal-smoked chicken marinated in kashmiri chilli paste with mint foam.
                         </p>
                         <button
@@ -407,8 +451,9 @@
                 </div>
 
                 <!-- Card 3: Dragon Fire -->
-                <div class="group relative" data-aos="fade-up" data-aos-delay="300">
-                    <div class="relative aspect-[3/4] overflow-hidden rounded-[2rem] bg-neutral-900 mb-8">
+                <div class="group relative" data-aos="fade-up" data-aos-delay="200">
+                    <div
+                        class="relative aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-[2rem] bg-neutral-900 mb-6 md:mb-8">
                         <img src="assets/chilli_momo.png"
                             class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 ease-in-out"
                             alt="Dragon Fire">
@@ -416,20 +461,20 @@
                             class="absolute inset-0 bg-gradient-to-t from-maroon-950/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500">
                         </div>
                         <div
-                            class="absolute top-6 right-6 backdrop-blur-md bg-white/10 border border-white/20 px-4 py-2 rounded-full">
-                            <span class="font-serif text-gold-300 italic text-lg">₹279</span>
+                            class="absolute top-4 right-4 md:top-6 md:right-6 backdrop-blur-md bg-white/10 border border-white/20 px-3 py-1 md:px-4 md:py-2 rounded-full">
+                            <span class="font-serif text-gold-300 italic text-base md:text-lg">₹279</span>
                         </div>
                     </div>
 
                     <div class="text-center px-4 relative">
                         <div
-                            class="absolute -top-4 left-1/2 -translate-x-1/2 w-0 h-px bg-gold-500/50 group-hover:w-16 transition-all duration-500">
+                            class="hidden md:block absolute -top-4 left-1/2 -translate-x-1/2 w-0 h-px bg-gold-500/50 group-hover:w-16 transition-all duration-500">
                         </div>
                         <h3
-                            class="font-serif text-3xl text-white mb-3 group-hover:text-gold-400 transition-colors duration-300">
+                            class="font-serif text-2xl md:text-3xl text-white mb-2 md:mb-3 group-hover:text-gold-400 transition-colors duration-300">
                             Dragon Fire</h3>
                         <p
-                            class="text-neutral-400 text-sm font-light leading-relaxed mb-6 max-w-xs mx-auto line-clamp-2 group-hover:text-neutral-300 transition-colors">
+                            class="text-neutral-400 text-sm font-light leading-relaxed mb-4 md:mb-6 max-w-xs mx-auto line-clamp-2 group-hover:text-neutral-300 transition-colors">
                             Wok-tossed in artisanal Schezwan sauce, glazed with sesame oil.
                         </p>
                         <button
@@ -441,7 +486,7 @@
 
             </div>
 
-            <div class="mt-24 flex justify-center" data-aos="fade-up">
+            <div class="mt-16 md:mt-24 flex justify-center" data-aos="fade-up">
                 <a href="#"
                     class="group relative px-8 py-4 overflow-hidden border border-gold-500/30 rounded-full hover:border-gold-500 transition-colors duration-500">
                     <span
@@ -733,6 +778,58 @@
                     modal.classList.add('hidden');
                 }, 300);
             }
+        }
+
+
+
+        // Chutney Scroll Animation
+        const scrollSection = document.getElementById('chutney-scroll');
+        const sprite = document.getElementById('chutney-sprite');
+        const dripText = document.getElementById('drip-text');
+        const dripSub = document.getElementById('drip-sub');
+
+        if (scrollSection && sprite) {
+            window.addEventListener('scroll', () => {
+                const rect = scrollSection.getBoundingClientRect();
+                const sectionHeight = scrollSection.offsetHeight - window.innerHeight;
+
+                // Calculate progress (0 to 1) based on how much has scrolled INTO and THROUGH the section
+                // We want animation to start when section hits top and end when it leaves.
+                let progress = -rect.top / sectionHeight;
+
+                // Clamp 0-1
+                progress = Math.max(0, Math.min(1, progress));
+
+                // 16 frames (0 to 15)
+                const totalFrames = 16;
+                const currentFrame = Math.floor(progress * (totalFrames - 1));
+
+                // Calculate Grid Position (4x4)
+                const col = currentFrame % 4;
+                const row = Math.floor(currentFrame / 4);
+
+                // 33.333% shift per frame (since 4 frames = 3 gaps = 100% / 3) 
+                // Actually for bg-position with % it interprets differently:
+                // 0% = left, 100% = right.
+                // 3 steps to get from 0 to 100: 0, 33.33, 66.66, 100.
+                const xPos = col * (100 / 3);
+                const yPos = row * (100 / 3);
+
+                sprite.style.backgroundPosition = `${xPos}% ${yPos}%`;
+
+                // Text Reveal logic
+                if (dripText && dripSub) {
+                    if (progress > 0.2) {
+                        dripText.style.opacity = '1';
+                        dripText.style.transform = 'translateY(0)';
+                        dripSub.style.opacity = '1';
+                    } else {
+                        dripText.style.opacity = '0';
+                        dripText.style.transform = 'translateY(10px)';
+                        dripSub.style.opacity = '0';
+                    }
+                }
+            });
         }
     </script>
 </body>
