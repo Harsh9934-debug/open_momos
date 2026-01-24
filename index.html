@@ -58,21 +58,32 @@
     </script>
 
     <style>
-        /* Custom Cursor - Hide on touch devices */
+        /* Start: custom-cursor defaults -> hidden by default to avoid flashes on touch devices */
+        .custom-cursor,
+        .cursor-dot {
+            display: none;
+        }
+
+        /* Custom Cursor - Show only on hover-capable, fine-pointer devices */
         @media (hover: hover) and (pointer: fine) {
             body {
                 cursor: none;
             }
-            .custom-cursor, .cursor-dot {
+
+            .custom-cursor,
+            .cursor-dot {
                 display: block;
             }
         }
 
+        /* Hide custom cursor on touch / coarse pointer devices */
         @media (hover: none) or (pointer: coarse) {
             body {
                 cursor: auto;
             }
-            .custom-cursor, .cursor-dot {
+
+            .custom-cursor,
+            .cursor-dot {
                 display: none !important;
             }
         }
@@ -85,21 +96,22 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border: 1px solid #FFD700;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
             mix-blend-mode: difference;
+            will-change: transform;
         }
 
         .custom-cursor.hovered {
-            width: 50px;
-            height: 50px;
-            background-color: rgba(255, 215, 0, 0.1);
+            width: 44px;
+            height: 44px;
+            background-color: rgba(255, 215, 0, 0.08);
             border-color: #E31837;
         }
 
@@ -114,6 +126,7 @@
             pointer-events: none;
             z-index: 10000;
             transform: translate(-50%, -50%);
+            will-change: transform;
         }
 
         /* Scrollbar */
@@ -185,6 +198,18 @@
                 font-size: 2.5rem !important;
             }
         }
+
+        /* Small enhancement to ensure modal wrapper does not push behind safe-area inset on iOS */
+        .modal-safe-area {
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* Ensure modal content box sizing to prevent overflow on very small screens */
+        #modal-content,
+        #modal-content * {
+            box-sizing: border-box;
+        }
     </style>
 </head>
 
@@ -210,8 +235,8 @@
     </div>
 
     <!-- Custom Cursor Elements -->
-    <div class="custom-cursor" id="cursor"></div>
-    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="custom-cursor" id="cursor" aria-hidden="true"></div>
+    <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
 
     <!-- Ambient Glows -->
     <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
@@ -224,10 +249,8 @@
     </div>
 
     <!-- Navigation -->
-    <!-- 🔧 FIX: Stabilized header over background video -->
     <header
-        class="fixed top-0 w-full z-50 transition-all duration-500 py-4 sm:py-6
-               bg-maroon-950/60 backdrop-blur-xl border-b border-white/5">
+        class="fixed top-0 w-full z-50 transition-all duration-500 py-4 sm:py-6 bg-maroon-950/60 backdrop-blur-xl border-b border-white/5">
         <div class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
 
             <!-- Logo -->
@@ -255,9 +278,7 @@
             <nav
                 class="hidden lg:flex items-center space-x-8 xl:space-x-10 text-xs font-medium tracking-[0.15em] uppercase">
                 <a href="menu.html" class="relative group text-neutral-400 hover:text-gold-400 transition-colors interactive-hover">
-    Signatures
-</a>
-
+                    Signatures
                     <span
                         class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-accent-red transition-all duration-300 group-hover:w-full"></span>
                 </a>
@@ -290,7 +311,7 @@
 
             <!-- Mobile Menu Button -->
             <button class="lg:hidden p-2 text-gold-400 interactive-hover z-50 relative"
-                onclick="toggleMobileMenu()">
+                onclick="toggleMobileMenu()" aria-expanded="false" aria-controls="mobile-menu">
                 <span class="iconify w-6 h-6" data-icon="lucide:menu" id="menu-icon"></span>
             </button>
         </div>
@@ -300,14 +321,11 @@
     <div id="mobile-menu"
         class="fixed inset-0 bg-maroon-950/95 backdrop-blur-xl z-40 hidden flex-col items-center justify-center space-y-6 sm:space-y-8 opacity-0 transition-opacity duration-300">
         <nav class="flex flex-col items-center space-y-6 sm:space-y-8 font-serif text-xl sm:text-2xl text-gold-300">
-    <a href="menu.html" class="hover:text-white transition-colors">Signatures</a>
-    <a href="menu.html" class="hover:text-white transition-colors">Philosophy</a>
-    <a href="menu.html" class="hover:text-white transition-colors">Visit</a>
-</nav>
-
-</nav>
-
+            <a href="menu.html" class="hover:text-white transition-colors">Signatures</a>
+            <a href="#why-us" class="hover:text-white transition-colors">Philosophy</a>
+            <a href="#location" class="hover:text-white transition-colors">Visit</a>
         </nav>
+
         <button onclick="toggleMobileMenu(); toggleModal(true)"
             class="px-6 sm:px-8 py-3 rounded-full bg-accent-red text-white text-xs sm:text-sm font-bold uppercase tracking-widest shadow-lg">
             Reserve Table
@@ -315,56 +333,52 @@
     </div>
 
     <!-- HERO SECTION -->
-<section id="hero"
-    class="relative isolate h-screen min-h-screen overflow-hidden">
+    <section id="hero"
+        class="relative isolate h-screen min-h-screen overflow-hidden">
 
-    <!-- Background Video Layer -->
-    <div class="absolute inset-0 z-0">
+        <!-- Background Video Layer -->
+        <div class="absolute inset-0 z-0">
 
-        <!-- Dark overlay for readability -->
-        <div class="absolute inset-0 bg-maroon-950/50 z-10"></div>
+            <!-- Dark overlay for readability -->
+            <div class="absolute inset-0 bg-maroon-950/50 z-10"></div>
 
-        <!-- Radial vignette -->
-        <div
-            class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0F0101_100%)] z-20 opacity-70">
-        </div>
+            <!-- Radial vignette -->
+            <div
+                class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0F0101_100%)] z-20 opacity-70">
+            </div>
 
-        <!-- Background Video -->
-        <video
-            autoplay
-            muted
-            loop
-            playsinline
-            class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto
+            <!-- Background Video -->
+            <video
+                autoplay
+                muted
+                loop
+                playsinline
+                class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto
                    -translate-x-1/2 -translate-y-1/2 object-cover">
-            <source src="assets/hero_bg.mp4" type="video/mp4">
-        </video>
-    </div>
-
-    <!-- Hero Content -->
-    <div class="relative z-30 flex items-center justify-center h-full w-full text-center px-4">
-        <div class="max-w-4xl">
-
-            <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl text-white mb-6 leading-tight">
-                Crafted <span class="italic text-gold-400">Silence,</span><br>
-                Served Loud.
-            </h1>
-
-            <p class="text-base sm:text-lg text-neutral-200 mb-10">
-                Where the misty hills of the Himalayas meet modern luxury.
-            </p>
-
-            <a href="menu.html"
-            class="interactive-hover px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-gold-300 text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest hover:bg-white/5 transition-colors">
-            Menu
-            </a>
-
-                View Menu
-            </a>
-
+                <source src="assets/hero_bg.mp4" type="video/mp4">
+            </video>
         </div>
-    </div>
-</section>
+
+        <!-- Hero Content -->
+        <div class="relative z-30 flex items-center justify-center h-full w-full text-center px-4">
+            <div class="max-w-4xl">
+
+                <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl text-white mb-6 leading-tight hero-title-main">
+                    Crafted <span class="italic text-gold-400">Silence,</span><br>
+                    Served Loud.
+                </h1>
+
+                <p class="text-base sm:text-lg text-neutral-200 mb-10">
+                    Where the misty hills of the Himalayas meet modern luxury.
+                </p>
+
+                <a href="menu.html"
+                    class="interactive-hover px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-gold-300 text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest hover:bg-white/5 transition-colors">
+                    Menu
+                </a>
+            </div>
+        </div>
+    </section>
 
 
     <!-- Signatures Section -->
@@ -378,10 +392,9 @@
                             class="text-neutral-500 italic">Creations</span></h2>
                 </div>
                 <a href="menu.html"
-                class="interactive-hover inline-flex items-center text-[0.65rem] sm:text-xs uppercase tracking-widest text-gold-400 hover:text-white transition-colors pb-1 border-b border-gold-400/30 hover:border-white">
-                View Full Menu <span class="iconify ml-2" data-icon="lucide:arrow-right"></span>
+                    class="interactive-hover inline-flex items-center text-[0.65rem] sm:text-xs uppercase tracking-widest text-gold-400 hover:text-white transition-colors pb-1 border-b border-gold-400/30 hover:border-white">
+                    View Full Menu <span class="iconify ml-2" data-icon="lucide:arrow-right"></span>
                 </a>
-
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-y-16 lg:gap-x-10">
@@ -567,9 +580,9 @@
                 Reserve
             </button>
             <a href="menu.html"
-   class="interactive-hover px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-gold-300 text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest hover:bg-white/5 transition-colors">
-   Menu
-</a>
+                class="interactive-hover px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-gold-300 text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest hover:bg-white/5 transition-colors">
+                Menu
+            </a>
 
         </div>
     </div>
@@ -577,74 +590,62 @@
     <!-- Reservation Modal -->
     <div id="reservation-modal" class="fixed inset-0 z-[1000] hidden opacity-0 transition-opacity duration-300">
         <div class="absolute inset-0 bg-maroon-950/90 backdrop-blur-md" onclick="toggleModal(false)"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg p-3 sm:p-4 max-h-[90vh] overflow-y-auto">
-            <div class="glass-card bg-maroon-900/50 p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl relative border-gold-500/20 transform scale-95 transition-transform duration-300"
-                id="modal-content">
-                <!-- Close Button -->
-                <button onclick="toggleModal(false)"
-                    class="absolute top-3 sm:top-4 right-3 sm:right-4 text-neutral-400 hover:text-white interactive-hover">
-                    <span class="iconify w-5 h-5 sm:w-6 sm:h-6" data-icon="lucide:x"></span>
-                </button>
 
-                <div class="text-center mb-6 sm:mb-8">
-                    <span class="text-gold-400 text-[0.65rem] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold">Book a Table</span>
-                    <h3 class="font-serif text-2xl sm:text-3xl text-white mt-2">Reserve Your Experience</h3>
+        <div class="relative z-50 flex items-start sm:items-center justify-center p-4 sm:p-6 modal-safe-area">
+            <!-- Make modal wrapper use viewport-relative width on small screens to avoid horizontal overflow -->
+            <div id="modal-content-wrapper" class="w-[95vw] sm:w-[88vw] md:w-full max-w-lg mx-auto max-h-[90svh] overflow-y-auto">
+                <div
+                    class="glass-card bg-maroon-900/50 p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl relative border-gold-500/20 transform scale-95 transition-transform duration-300"
+                    id="modal-content" role="dialog" aria-modal="true" aria-labelledby="reservation-title">
+                    <!-- Close Button -->
+                    <button onclick="toggleModal(false)"
+                        class="absolute top-3 sm:top-4 right-3 sm:right-4 text-neutral-400 hover:text-white interactive-hover" aria-label="Close reservation">
+                        <span class="iconify w-5 h-5 sm:w-6 sm:h-6" data-icon="lucide:x"></span>
+                    </button>
+
+                    <div class="text-center mb-4 sm:mb-6">
+                        <span class="text-gold-400 text-[0.65rem] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold">Book a Table</span>
+                        <h3 id="reservation-title" class="font-serif text-2xl sm:text-3xl text-white mt-2">Reserve Your Experience</h3>
+                    </div>
+
+                    <form class="space-y-3 sm:space-y-4"
+                        onsubmit="event.preventDefault(); alert('Reservation Request Sent! We will confirm shortly.'); toggleModal(false);">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                            <div>
+                                <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Date</label>
+                                <input type="date"
+                                    class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-3 py-2.5 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Guests</label>
+                                <select
+                                    class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-3 py-2.5 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
+                                    <option>2 Guests</option>
+                                    <option>3 Guests</option>
+                                    <option>4 Guests</option>
+                                    <option>5+ Guests</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Name</label>
+                            <input type="text" placeholder="Your Name"
+                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-3 py-2.5 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Phone</label>
+                            <input type="tel" placeholder="+91 ..."
+                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-3 py-2.5 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
+                        </div>
+                        <button
+                            class="interactive-hover w-full py-3 sm:py-4 mt-3 sm:mt-4 bg-gradient-to-r from-gold-600 to-gold-400 text-maroon-950 font-bold uppercase tracking-wider sm:tracking-widest text-xs sm:text-sm rounded-lg shadow-lg hover:brightness-110 transition-all">Confirm
+                            Booking</button>
+                    </form>
                 </div>
-
-                <form class="space-y-3 sm:space-y-4"
-                    onsubmit="event.preventDefault(); alert('Reservation Request Sent! We will confirm shortly.'); toggleModal(false);">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                        <div>
-                            <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Date</label>
-                            <input type="date"
-                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
-                        </div>
-                        <div>
-                            <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Guests</label>
-                            <select
-                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
-                                <option>2 Guests</option>
-                                <option>3 Guests</option>
-                                <option>4 Guests</option>
-                                <option>5+ Guests</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Name</label>
-                        <input type="text" placeholder="Your Name"
-                            class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
-                    </div>
-                    <div>
-                        <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Phone</label>
-                        <input type="tel" placeholder="+91 ..."
-                            class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
-                    </div>
-                    <button
-                        class="interactive-hover w-full py-3 sm:py-4 mt-3 sm:mt-4 bg-gradient-to-r from-gold-600 to-gold-400 text-maroon-950 font-bold uppercase tracking-wider sm:tracking-widest text-xs sm:text-sm rounded-lg shadow-lg hover:brightness-110 transition-all">Confirm
-                        Booking</button>
-                </form>
             </div>
         </div>
     </div>
 
-
-    <!-- chatney section  -->
-
-    <!-- <section id="chutney-scroll" class="h-[120vh] sm:h-[150vh] md:h-[200vh] relative bg-neutral-900 border-t border-white/5">
-        <div class="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-            <div class="absolute top-1/4 z-20 text-center mix-blend-difference pointer-events-none px-4">
-                <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl text-white opacity-0 transform translate-y-10 transition-all duration-700 ease-out"
-                    id="drip-text">
-                    Pure <span class="italic text-gold-500">Essence</span>
-                </h2>
-            </div>
-
-            <div id="chutney-sprite"
-                class="w-[300px] sm:w-[400px] md:w-[500px] lg:w-[600px] max-w-[90vw] h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] bg-[url('assets/chutney_drip_spritesheet.png')] bg-no-repeat bg-[length:400%_400%] bg-left-top relative z-10 filter contrast-110">
-            </div>
-        </div>
-    </section> -->
 
     <!-- Footer -->
     <footer class="bg-maroon-950 py-10 sm:py-12 md:py-20 border-t border-gold-500/5 text-center relative z-10">
@@ -693,7 +694,7 @@
             });
         }
 
-        // PARALLAX FALLING SAUCE LOGIC
+        // PARALLAX FALLING SAUCE LOGIC (keeps original guard)
         const fallingSauce = document.getElementById('falling-sauce');
         if (fallingSauce) {
             window.addEventListener('scroll', () => {
@@ -715,28 +716,59 @@
             }
         });
 
-        // Custom Cursor Logic - Only for non-touch devices
-        const cursor = document.getElementById('cursor');
-        const cursorDot = document.getElementById('cursor-dot');
-        const interactiveElements = document.querySelectorAll('.interactive-hover, a, button, input, select');
+        // Custom Cursor Logic - improved detection & fallback
+        (function () {
+            const cursor = document.getElementById('cursor');
+            const cursorDot = document.getElementById('cursor-dot');
+            // live list of interactive elements
+            const interactiveSelector = '.interactive-hover, a, button, input, select, textarea';
+            let interactiveElements = [];
 
-        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-                cursorDot.style.left = e.clientX + 'px';
-                cursorDot.style.top = e.clientY + 'px';
-            });
+            // better detection of touch devices: consider pointer and touch points
+            const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0 || window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
 
-            interactiveElements.forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.classList.add('hovered');
+            // show custom cursor only when it's a non-touch, hover-capable device
+            const canUseCustomCursor = !isTouch && window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+            if (!cursor || !cursorDot) return;
+
+            if (canUseCustomCursor) {
+                // set initial visibility
+                cursor.style.display = 'block';
+                cursorDot.style.display = 'block';
+
+                // move the cursor
+                document.addEventListener('mousemove', (e) => {
+                    // use requestAnimationFrame to reduce layout thrash on some devices
+                    requestAnimationFrame(() => {
+                        cursor.style.left = e.clientX + 'px';
+                        cursor.style.top = e.clientY + 'px';
+                        cursorDot.style.left = e.clientX + 'px';
+                        cursorDot.style.top = e.clientY + 'px';
+                    });
                 });
-                el.addEventListener('mouseleave', () => {
-                    cursor.classList.remove('hovered');
-                });
-            });
-        }
+
+                // attach hover states to interactive elements (refreshable)
+                function attachInteractiveHandlers() {
+                    interactiveElements = document.querySelectorAll(interactiveSelector);
+                    interactiveElements.forEach(el => {
+                        el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+                        el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+                    });
+                }
+
+                attachInteractiveHandlers();
+
+                // If UI dynamically adds elements (menus, modals), re-attach on DOM changes
+                const mo = new MutationObserver(() => attachInteractiveHandlers());
+                mo.observe(document.body, { childList: true, subtree: true });
+            } else {
+                // ensure the native cursor is available
+                cursor.style.display = 'none';
+                cursorDot.style.display = 'none';
+                document.body.style.cursor = 'auto';
+            }
+        })();
 
         // Preloader Logic
         window.addEventListener('load', () => {
@@ -751,20 +783,25 @@
             }, 1200);
         });
 
-        // Modal Logic
+        // Modal Logic (improved to avoid scroll bleed and ensure proper entry/exit on small screens)
         function toggleModal(show) {
             const modal = document.getElementById('reservation-modal');
             const content = document.getElementById('modal-content');
 
+            if (!modal || !content) return;
+
             if (show) {
                 modal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
+                // force reflow for transition
                 void modal.offsetWidth;
                 modal.style.opacity = '1';
+                // animate content to full scale
                 content.classList.remove('scale-95');
                 content.classList.add('scale-100');
             } else {
                 modal.style.opacity = '0';
+                // restore small scale for exit animation
                 content.classList.remove('scale-100');
                 content.classList.add('scale-95');
                 document.body.style.overflow = '';
@@ -778,17 +815,18 @@
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
+            const isHidden = menu.classList.contains('hidden');
 
-            if (menu.classList.contains('hidden')) {
+            if (isHidden) {
                 menu.classList.remove('hidden');
                 menu.classList.add('flex');
                 document.body.style.overflow = 'hidden';
                 void menu.offsetWidth;
                 menu.classList.remove('opacity-0');
-                icon.setAttribute('data-icon', 'lucide:x');
+                if (icon) icon.setAttribute('data-icon', 'lucide:x');
             } else {
                 menu.classList.add('opacity-0');
-                icon.setAttribute('data-icon', 'lucide:menu');
+                if (icon) icon.setAttribute('data-icon', 'lucide:menu');
                 document.body.style.overflow = '';
                 setTimeout(() => {
                     menu.classList.add('hidden');
