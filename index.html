@@ -185,12 +185,6 @@
                 font-size: 2.5rem !important;
             }
         }
-
-        /* Small enhancement to ensure modal wrapper does not push behind safe-area inset on iOS */
-        .modal-safe-area {
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
-        }
     </style>
 </head>
 
@@ -581,64 +575,55 @@
     </div>
 
     <!-- Reservation Modal -->
-    <!-- Reworked modal wrapper to use a flex-centered layout that is responsive:
-         - items-start on small screens (so the modal appears near the top and is easy to reach)
-         - items-center on larger screens (desktop-like centered modal)
-         - keeps content scrollable within max height and honors safe-area insets
-    -->
     <div id="reservation-modal" class="fixed inset-0 z-[1000] hidden opacity-0 transition-opacity duration-300">
         <div class="absolute inset-0 bg-maroon-950/90 backdrop-blur-md" onclick="toggleModal(false)"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg p-3 sm:p-4 max-h-[90vh] overflow-y-auto">
+            <div class="glass-card bg-maroon-900/50 p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl relative border-gold-500/20 transform scale-95 transition-transform duration-300"
+                id="modal-content">
+                <!-- Close Button -->
+                <button onclick="toggleModal(false)"
+                    class="absolute top-3 sm:top-4 right-3 sm:right-4 text-neutral-400 hover:text-white interactive-hover">
+                    <span class="iconify w-5 h-5 sm:w-6 sm:h-6" data-icon="lucide:x"></span>
+                </button>
 
-        <div class="relative z-50 flex items-start sm:items-center justify-center p-4 sm:p-6 modal-safe-area">
-            <div id="modal-content-wrapper" class="w-full max-w-lg mx-auto max-h-[90svh] overflow-y-auto">
-                <div
-                    class="glass-card bg-maroon-900/50 p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl relative border-gold-500/20 transform scale-95 transition-transform duration-300"
-                    id="modal-content">
-                    <!-- Close Button -->
-                    <button onclick="toggleModal(false)"
-                        class="absolute top-3 sm:top-4 right-3 sm:right-4 text-neutral-400 hover:text-white interactive-hover">
-                        <span class="iconify w-5 h-5 sm:w-6 sm:h-6" data-icon="lucide:x"></span>
-                    </button>
-
-                    <div class="text-center mb-6 sm:mb-8">
-                        <span class="text-gold-400 text-[0.65rem] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold">Book a Table</span>
-                        <h3 class="font-serif text-2xl sm:text-3xl text-white mt-2">Reserve Your Experience</h3>
-                    </div>
-
-                    <form class="space-y-3 sm:space-y-4"
-                        onsubmit="event.preventDefault(); alert('Reservation Request Sent! We will confirm shortly.'); toggleModal(false);">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                            <div>
-                                <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Date</label>
-                                <input type="date"
-                                    class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
-                            </div>
-                            <div>
-                                <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Guests</label>
-                                <select
-                                    class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
-                                    <option>2 Guests</option>
-                                    <option>3 Guests</option>
-                                    <option>4 Guests</option>
-                                    <option>5+ Guests</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Name</label>
-                            <input type="text" placeholder="Your Name"
-                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
-                        </div>
-                        <div>
-                            <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Phone</label>
-                            <input type="tel" placeholder="+91 ..."
-                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
-                        </div>
-                        <button
-                            class="interactive-hover w-full py-3 sm:py-4 mt-3 sm:mt-4 bg-gradient-to-r from-gold-600 to-gold-400 text-maroon-950 font-bold uppercase tracking-wider sm:tracking-widest text-xs sm:text-sm rounded-lg shadow-lg hover:brightness-110 transition-all">Confirm
-                            Booking</button>
-                    </form>
+                <div class="text-center mb-6 sm:mb-8">
+                    <span class="text-gold-400 text-[0.65rem] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] font-bold">Book a Table</span>
+                    <h3 class="font-serif text-2xl sm:text-3xl text-white mt-2">Reserve Your Experience</h3>
                 </div>
+
+                <form class="space-y-3 sm:space-y-4"
+                    onsubmit="event.preventDefault(); alert('Reservation Request Sent! We will confirm shortly.'); toggleModal(false);">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                        <div>
+                            <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Date</label>
+                            <input type="date"
+                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Guests</label>
+                            <select
+                                class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
+                                <option>2 Guests</option>
+                                <option>3 Guests</option>
+                                <option>4 Guests</option>
+                                <option>5+ Guests</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Name</label>
+                        <input type="text" placeholder="Your Name"
+                            class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-[0.65rem] sm:text-xs uppercase tracking-widest text-neutral-400 mb-1.5 sm:mb-2">Phone</label>
+                        <input type="tel" placeholder="+91 ..."
+                            class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
+                    </div>
+                    <button
+                        class="interactive-hover w-full py-3 sm:py-4 mt-3 sm:mt-4 bg-gradient-to-r from-gold-600 to-gold-400 text-maroon-950 font-bold uppercase tracking-wider sm:tracking-widest text-xs sm:text-sm rounded-lg shadow-lg hover:brightness-110 transition-all">Confirm
+                        Booking</button>
+                </form>
             </div>
         </div>
     </div>
@@ -776,12 +761,10 @@
                 document.body.style.overflow = 'hidden';
                 void modal.offsetWidth;
                 modal.style.opacity = '1';
-                // animate content to full scale
                 content.classList.remove('scale-95');
                 content.classList.add('scale-100');
             } else {
                 modal.style.opacity = '0';
-                // restore small scale for exit animation
                 content.classList.remove('scale-100');
                 content.classList.add('scale-95');
                 document.body.style.overflow = '';
@@ -854,6 +837,3 @@
 </body>
 
 </html>
-```
-
-
