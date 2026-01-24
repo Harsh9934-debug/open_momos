@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Menu | Open Momos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        maroon: {
+                            950: '#0F0101',
+                            900: '#1A0202',
+                        },
+                        gold: {
+                            400: '#FFD700',
+                            500: '#D4AF37',
+                        },
+                        accent: {
+                            red: '#E31837',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: radial-gradient(circle at top, #1A0202, #0F0101);
+        }
+    </style>
+</head>
+
+<body class="text-neutral-100 font-sans">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-maroon-950/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 rounded-full border border-gold-400 flex items-center justify-center font-serif text-xl">
+                    M
+                </div>
+                <span class="font-serif text-lg text-gold-400">Open Momos</span>
+            </a>
+
+            <a href="index.html"
+                class="text-xs uppercase tracking-widest text-neutral-400 hover:text-gold-400 transition">
+                ← Back to Home
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-20 text-center">
+        <span class="text-xs uppercase tracking-[0.4em] text-gold-400">Our Collection</span>
+        <h1 class="font-serif text-5xl md:text-6xl mt-4">
+            The <span class="italic text-gold-400">Menu</span>
+        </h1>
+        <p class="text-neutral-400 mt-6 max-w-xl mx-auto">
+            Each creation is handcrafted, inspired by Himalayan flavors, and finished with modern elegance.
+        </p>
+    </section>
+
+    <!-- Menu Sections -->
+<section class="max-w-6xl mx-auto px-6 pb-32 space-y-24">
+
+    <!-- Steam Momos -->
+    <div>
+        <h2 class="font-serif text-3xl text-white mb-10 border-b border-gold-500/20 pb-4">
+            Steamed Signatures
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="glass-card p-6 rounded-xl border border-gold-500/10">
+                <img src="assets/white_momo.png" alt="Imperial Truffle" class="w-full h-40 object-cover rounded-lg mb-4">
+                <div class="flex justify-between mb-2">
+                    <h3 class="font-serif text-xl">Imperial Truffle</h3>
+                    <span class="text-gold-400 font-serif">₹349</span>
+                </div>
+                <p class="text-sm text-neutral-400">
+                    Wild mushroom duxelle, white truffle oil, crystal skin.
+                </p>
+            </div>
+
+            <div class="glass-card p-6 rounded-xl border border-gold-500/10">
+                <img src="assets/chilli_momo.png" alt="Himalayan Veg" class="w-full h-40 object-cover rounded-lg mb-4">
+                <div class="flex justify-between mb-2">
+                    <h3 class="font-serif text-xl">Himalayan Veg</h3>
+                    <span class="text-gold-400 font-serif">₹199</span>
+                </div>
+                <p class="text-sm text-neutral-400">
+                    Cabbage, garlic chives, ginger, soy reduction.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tandoori -->
+    <div>
+        <h2 class="font-serif text-3xl text-white mb-10 border-b border-gold-500/20 pb-4">
+            Fire & Smoke
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="glass-card p-6 rounded-xl border border-gold-500/10">
+                <img src="assets/tandoori_momo.png" alt="Smoked Ruby" class="w-full h-40 object-cover rounded-lg mb-4">
+                <div class="flex justify-between mb-2">
+                    <h3 class="font-serif text-xl">Smoked Ruby</h3>
+                    <span class="text-gold-400 font-serif">₹299</span>
+                </div>
+                <p class="text-sm text-neutral-400">
+                    Kashmiri chilli marinade, charcoal smoked.
+                </p>
+            </div>
+
+            <div class="glass-card p-6 rounded-xl border border-gold-500/10">
+                <img src="assets/momo_platter.png" alt="Royal Paneer Tandoori" class="w-full h-40 object-cover rounded-lg mb-4">
+                <div class="flex justify-between mb-2">
+                    <h3 class="font-serif text-xl">Royal Paneer Tandoori</h3>
+                    <span class="text-gold-400 font-serif">₹259</span>
+                </div>
+                <p class="text-sm text-neutral-400">
+                    Hung curd, smoked paprika, saffron hint.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sauced -->
+    <div>
+        <h2 class="font-serif text-3xl text-white mb-10 border-b border-gold-500/20 pb-4">
+            Wok Tossed
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <div class="glass-card p-6 rounded-xl border border-gold-500/10">
+                <img src="assets/hero_momo.png" alt="Dragon Fire" class="w-full h-40 object-cover rounded-lg mb-4">
+                <div class="flex justify-between mb-2">
+                    <h3 class="font-serif text-xl">Dragon Fire</h3>
+                    <span class="text-gold-400 font-serif">₹279</span>
+                </div>
+                <p class="text-sm text-neutral-400">
+                    Schezwan glaze, sesame oil, micro coriander.
+                </p>
+            </div>
+
+            <div class="glass-card p-6 rounded-xl border border-gold-500/10">
+                <img src="assets/chutney_drip.png" alt="Golden Garlic Butter" class="w-full h-40 object-cover rounded-lg mb-4">
+                <div class="flex justify-between mb-2">
+                    <h3 class="font-serif text-xl">Golden Garlic Butter</h3>
+                    <span class="text-gold-400 font-serif">₹269</span>
+                </div>
+                <p class="text-sm text-neutral-400">
+                    Slow roasted garlic, butter emulsion, herbs.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+    <!-- Footer -->
+    <footer class="text-center py-16 border-t border-white/5">
+        <p class="text-xs tracking-widest text-neutral-500">
+            © 2024 Open Momos — Crafted with Silence, Served Loud.
+        </p>
+    </footer>
+
+</body>
+</html>
