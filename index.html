@@ -298,7 +298,7 @@
 
             <!-- CTA -->
             <div class="hidden sm:flex items-center space-x-4">
-                <button onclick="toggleModal(true)"
+                <button onclick="toggleModal(true)" data-haptic="medium"
                     class="interactive-hover relative px-5 sm:px-8 py-2.5 sm:py-3 overflow-hidden rounded-full group bg-transparent border border-gold-500/30 hover:border-gold-500/80 transition-all duration-500">
                     <span
                         class="absolute inset-0 w-full h-full bg-gold-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -311,7 +311,7 @@
 
             <!-- Mobile Menu Button -->
             <button class="lg:hidden p-2 text-gold-400 interactive-hover z-50 relative"
-                onclick="toggleMobileMenu()" aria-expanded="false" aria-controls="mobile-menu">
+                onclick="toggleMobileMenu()" aria-expanded="false" aria-controls="mobile-menu" data-haptic="light">
                 <span class="iconify w-6 h-6" data-icon="lucide:menu" id="menu-icon"></span>
             </button>
         </div>
@@ -326,7 +326,7 @@
             <a href="#location" class="hover:text-white transition-colors">Visit</a>
         </nav>
 
-        <button onclick="toggleMobileMenu(); toggleModal(true)"
+        <button onclick="toggleMobileMenu(); toggleModal(true)" data-haptic="medium"
             class="px-6 sm:px-8 py-3 rounded-full bg-accent-red text-white text-xs sm:text-sm font-bold uppercase tracking-widest shadow-lg">
             Reserve Table
         </button>
@@ -421,7 +421,7 @@
                         </div>
                         <p class="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed mb-3 sm:mb-4 line-clamp-2">Delicate
                             crystal skin, wild mushroom duxelle, finished with 24k gold leaf and white truffle oil.</p>
-                        <button
+                        <button data-haptic="light"
                             class="text-[0.65rem] sm:text-xs uppercase tracking-widest text-white/50 group-hover:text-accent-red transition-colors flex items-center">
                             Add to Order <span
                                 class="iconify ml-2 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-1"
@@ -448,7 +448,7 @@
                         </div>
                         <p class="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed mb-3 sm:mb-4 line-clamp-2">Charcoal-smoked
                             chicken marinated in our secret Kashmiri chilli paste, served with mint foam.</p>
-                        <button
+                        <button data-haptic="light"
                             class="text-[0.65rem] sm:text-xs uppercase tracking-widest text-white/50 group-hover:text-accent-red transition-colors flex items-center">
                             Add to Order <span
                                 class="iconify ml-2 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-1"
@@ -475,7 +475,7 @@
                         </div>
                         <p class="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed mb-3 sm:mb-4 line-clamp-2">Wok-tossed in
                             artisanal Schezwan sauce, glazed with sesame oil and topped with micro-coriander.</p>
-                        <button
+                        <button data-haptic="light"
                             class="text-[0.65rem] sm:text-xs uppercase tracking-widest text-white/50 group-hover:text-accent-red transition-colors flex items-center">
                             Add to Order <span
                                 class="iconify ml-2 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-1"
@@ -515,7 +515,7 @@
                     class="w-full h-full filter grayscale contrast-125 opacity-50 group-hover:opacity-80 transition-opacity duration-700 invert"
                     style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 z-10">
-                    <button
+                    <button data-haptic="light"
                         class="bg-white text-maroon-950 px-4 sm:px-6 py-2 rounded-full text-[0.65rem] sm:text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-gold-400 transition-colors">Open
                         in Maps</button>
                 </div>
@@ -575,7 +575,7 @@
     <div id="floating-nav"
         class="fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-40 translate-y-20 opacity-0 transition-all duration-500">
         <div class="glass-card rounded-full p-1.5 sm:p-2 flex items-center gap-1.5 sm:gap-2 shadow-2xl bg-maroon-950/80">
-            <button onclick="toggleModal(true)"
+            <button onclick="toggleModal(true)" data-haptic="medium"
                 class="interactive-hover px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-accent-red text-white text-[0.65rem] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest hover:bg-red-600 transition-colors shadow-lg">
                 Reserve
             </button>
@@ -598,7 +598,7 @@
                     class="glass-card bg-maroon-900/50 p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl relative border-gold-500/20 transform scale-95 transition-transform duration-300"
                     id="modal-content" role="dialog" aria-modal="true" aria-labelledby="reservation-title">
                     <!-- Close Button -->
-                    <button onclick="toggleModal(false)"
+                    <button onclick="toggleModal(false)" data-haptic="light"
                         class="absolute top-3 sm:top-4 right-3 sm:right-4 text-neutral-400 hover:text-white interactive-hover" aria-label="Close reservation">
                         <span class="iconify w-5 h-5 sm:w-6 sm:h-6" data-icon="lucide:x"></span>
                     </button>
@@ -637,7 +637,7 @@
                             <input type="tel" placeholder="+91 ..."
                                 class="w-full bg-maroon-950/50 border border-gold-500/20 rounded-lg px-3 sm:px-3 py-2.5 text-white text-sm sm:text-base focus:outline-none focus:border-gold-500 transition-colors">
                         </div>
-                        <button
+                        <button type="submit" data-haptic="success"
                             class="interactive-hover w-full py-3 sm:py-4 mt-3 sm:mt-4 bg-gradient-to-r from-gold-600 to-gold-400 text-maroon-950 font-bold uppercase tracking-wider sm:tracking-widest text-xs sm:text-sm rounded-lg shadow-lg hover:brightness-110 transition-all">Confirm
                             Booking</button>
                     </form>
@@ -670,6 +670,40 @@
     <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // HAPTICS UTILITY (best-effort for iOS / Taptic-like feedback)
+        // - Uses Vibration API when available and when running on iOS-like environment
+        // - Gracefully no-ops otherwise so there's no impact on other platforms
+        const Haptics = (function () {
+            const supportsVibrate = 'vibrate' in navigator;
+            // iOS detection: covers devices and iPadOS on modern Safari
+            const isiOS = /iP(ad|hone|od)/.test(navigator.userAgent) ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ||
+                /iPhone|iPad|iPod/.test(navigator.platform || '');
+            const enabled = supportsVibrate && isiOS;
+
+            const patterns = {
+                light: 10,
+                medium: [20, 10, 20],
+                heavy: [50, 20, 50],
+                success: [30, 15, 30],
+                error: [60, 20, 30, 20, 60]
+            };
+
+            function trigger(type = 'light') {
+                if (!enabled) return false;
+                const p = patterns[type] || patterns.light;
+                try {
+                    // navigator.vibrate accepts number or array
+                    return navigator.vibrate(p);
+                } catch (e) {
+                    // silently fail if vibration throws
+                    return false;
+                }
+            }
+
+            return { enabled, trigger };
+        })();
+
         // Initialize AOS
         AOS.init({
             once: true,
@@ -780,6 +814,8 @@
             setTimeout(() => {
                 preloader.style.opacity = '0';
                 preloader.style.visibility = 'hidden';
+                // subtle haptic to signal page ready (best-effort on iOS)
+                if (Haptics && Haptics.trigger) Haptics.trigger('medium');
             }, 1200);
         });
 
@@ -799,12 +835,16 @@
                 // animate content to full scale
                 content.classList.remove('scale-95');
                 content.classList.add('scale-100');
+                // haptic feedback
+                if (Haptics && Haptics.trigger) Haptics.trigger('light');
             } else {
                 modal.style.opacity = '0';
                 // restore small scale for exit animation
                 content.classList.remove('scale-100');
                 content.classList.add('scale-95');
                 document.body.style.overflow = '';
+                // haptic feedback
+                if (Haptics && Haptics.trigger) Haptics.trigger('light');
                 setTimeout(() => {
                     modal.classList.add('hidden');
                 }, 300);
@@ -824,16 +864,46 @@
                 void menu.offsetWidth;
                 menu.classList.remove('opacity-0');
                 if (icon) icon.setAttribute('data-icon', 'lucide:x');
+                if (Haptics && Haptics.trigger) Haptics.trigger('light');
             } else {
                 menu.classList.add('opacity-0');
                 if (icon) icon.setAttribute('data-icon', 'lucide:menu');
                 document.body.style.overflow = '';
+                if (Haptics && Haptics.trigger) Haptics.trigger('light');
                 setTimeout(() => {
                     menu.classList.add('hidden');
                     menu.classList.remove('flex');
                 }, 300);
             }
         }
+
+        // Haptic wiring for data-haptic attributes:
+        // - click events will trigger the mapped haptic type (data-haptic)
+        // - pointerdown used to provide immediate tactile feedback on touch
+        document.addEventListener('click', (e) => {
+            try {
+                const el = e.target.closest && e.target.closest('[data-haptic]');
+                if (el) {
+                    const type = el.getAttribute('data-haptic') || 'light';
+                    if (Haptics && Haptics.trigger) Haptics.trigger(type);
+                }
+            } catch (err) {
+                // ignore
+            }
+        });
+
+        // pointerdown gives more immediate feedback on touch devices
+        document.addEventListener('pointerdown', (e) => {
+            try {
+                const el = e.target.closest && e.target.closest('[data-haptic]');
+                if (el) {
+                    const type = el.getAttribute('data-haptic') || 'light';
+                    if (Haptics && Haptics.trigger) Haptics.trigger(type);
+                }
+            } catch (err) {
+                // ignore
+            }
+        });
 
         // Chutney Scroll Animation
         const scrollSection = document.getElementById('chutney-scroll');
