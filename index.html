@@ -488,7 +488,7 @@
     </section>
 
     <!-- Quote Section -->
-    <section
+    <section id="why-us"
         class="relative py-16 sm:py-20 md:py-32 lg:py-40 bg-fixed bg-cover bg-center flex items-center justify-center bg-maroon-950"
         style="background-image: url('assets/hero_momo.png');">
         <div class="absolute inset-0 bg-maroon-950/80"></div>
@@ -941,6 +941,56 @@
                 }
             });
         }
+
+        // Smooth scroll to "Philosophy" quote (id = why-us)
+        // - Accounts for fixed header height so the quote is not hidden beneath it.
+        // - Closes mobile menu first if it's open (good UX on small screens).
+        (function () {
+            const selector = 'a[href="#why-us"]';
+            const links = document.querySelectorAll(selector);
+            const target = document.getElementById('why-us');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (!target || !links || links.length === 0) return;
+
+            function scrollToWhyUs() {
+                const headerEl = document.querySelector('header');
+                const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 0;
+                const rect = target.getBoundingClientRect();
+                const offset = 16; // small spacing from header
+                const targetY = window.scrollY + rect.top - headerHeight - offset;
+
+                window.scrollTo({
+                    top: Math.max(0, targetY),
+                    behavior: 'smooth'
+                });
+            }
+
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // prevent default anchor jump
+                    e.preventDefault();
+
+                    // If mobile menu is visible, close it first to restore normal scrolling
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        // toggleMobileMenu will animate and restore document overflow
+                        try {
+                            toggleMobileMenu();
+                        } catch (err) {
+                            // if toggleMobileMenu isn't available for any reason, ensure menu is hidden
+                            mobileMenu.classList.add('hidden');
+                            mobileMenu.classList.remove('flex');
+                            document.body.style.overflow = '';
+                        }
+
+                        // wait a tick so menu close animation can start (helps prevent abrupt scroll)
+                        setTimeout(scrollToWhyUs, 250);
+                    } else {
+                        scrollToWhyUs();
+                    }
+                });
+            });
+        })();
     </script>
 </body>
 
